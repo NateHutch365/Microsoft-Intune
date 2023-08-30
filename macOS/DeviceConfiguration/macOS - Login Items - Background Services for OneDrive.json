@@ -1,0 +1,59 @@
+{
+  "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/deviceConfigurations(assignments())/$entity",
+  "@odata.type": "#microsoft.graph.macOSCustomConfiguration",
+  "@odata.id": "deviceManagement/deviceConfigurations('ed884a23-7cf2-477a-be88-7aac74114c3c')",
+  "@odata.editLink": "deviceManagement/deviceConfigurations('ed884a23-7cf2-477a-be88-7aac74114c3c')/microsoft.graph.macOSCustomConfiguration",
+  "id": "ed884a23-7cf2-477a-be88-7aac74114c3c",
+  "lastModifiedDateTime@odata.type": "#DateTimeOffset",
+  "lastModifiedDateTime": "2023-08-15T11:06:21.7093971Z",
+  "roleScopeTagIds@odata.type": "#Collection(String)",
+  "roleScopeTagIds": [
+    "0"
+  ],
+  "supportsScopeTags": true,
+  "deviceManagementApplicabilityRuleOsEdition": null,
+  "deviceManagementApplicabilityRuleOsVersion": null,
+  "deviceManagementApplicabilityRuleDeviceMode": null,
+  "createdDateTime@odata.type": "#DateTimeOffset",
+  "createdDateTime": "2023-08-14T21:45:02.5009087Z",
+  "description": null,
+  "displayName": "macOS - Login Items - Background Services for OneDrive",
+  "version": 2,
+  "payloadName": "onedrive_background_services.mobileconfig",
+  "payloadFileName": "onedrive_background_services.mobileconfig",
+  "payload@odata.type": "#Binary",
+  "payload": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCFET0NUWVBFIHBsaXN0IFBVQkxJQyAiLS8vQXBwbGUvL0RURCBQTElTVCAxLjAvL0VOIiAiaHR0cDovL3d3dy5hcHBsZS5jb20vRFREcy9Qcm9wZXJ0eUxpc3QtMS4wLmR0ZCI+CjxwbGlzdCB2ZXJzaW9uPSIxIj4KICAgIDxkaWN0PgogICAgICAgIDxrZXk+UGF5bG9hZFVVSUQ8L2tleT4KICAgICAgICA8c3RyaW5nPkIyMjQ4REU5LUY5RjQtNEQ4MC05RDhFLUM3MTRGMTQ1NDlGRTwvc3RyaW5nPgogICAgICAgIDxrZXk+UGF5bG9hZFR5cGU8L2tleT4KICAgICAgICA8c3RyaW5nPkNvbmZpZ3VyYXRpb248L3N0cmluZz4KICAgICAgICA8a2V5PlBheWxvYWRPcmdhbml6YXRpb248L2tleT4KICAgICAgICA8c3RyaW5nPk1pY3Jvc29mdCBDb3Jwb3JhdGlvbjwvc3RyaW5nPgogICAgICAgIDxrZXk+UGF5bG9hZElkZW50aWZpZXI8L2tleT4KICAgICAgICA8c3RyaW5nPkIyMjQ4REU5LUY5RjQtNEQ4MC05RDhFLUM3MTRGMTQ1NDlGRTwvc3RyaW5nPgogICAgICAgIDxrZXk+UGF5bG9hZERpc3BsYXlOYW1lPC9rZXk+CiAgICAgICAgPHN0cmluZz5CYWNrZ3JvdW5kIFNlcnZpY2UgQ29uZmlndXJhdGlvbiBQcm9maWxlPC9zdHJpbmc+CiAgICAgICAgPGtleT5QYXlsb2FkRGVzY3JpcHRpb248L2tleT4KICAgICAgICA8c3RyaW5nLz4KICAgICAgICA8a2V5PlBheWxvYWRWZXJzaW9uPC9rZXk+CiAgICAgICAgPGludGVnZXI+MTwvaW50ZWdlcj4KICAgICAgICA8a2V5PlBheWxvYWRFbmFibGVkPC9rZXk+CiAgICAgICAgPHRydWUvPgogICAgICAgIDxrZXk+UGF5bG9hZFJlbW92YWxEaXNhbGxvd2VkPC9rZXk+CiAgICAgICAgPHRydWUvPgogICAgICAgIDxrZXk+UGF5bG9hZFNjb3BlPC9rZXk+CiAgICAgICAgPHN0cmluZz5TeXN0ZW08L3N0cmluZz4KICAgICAgICA8a2V5PlBheWxvYWRDb250ZW50PC9rZXk+CiAgICAgICAgPGFycmF5PgogICAgICAgICAgICA8ZGljdD4KICAgICAgICAgICAgICAgIDxrZXk+UGF5bG9hZERlc2NyaXB0aW9uPC9rZXk+CiAgICAgICAgICAgICAgICA8c3RyaW5nPkJhY2tncm91bmQgU2VydmljZSBNYW5hZ2VtZW50IGZvciBNaWNyb3NvZnQgT25lRHJpdmU8L3N0cmluZz4KICAgICAgICAgICAgICAgIDxrZXk+UGF5bG9hZElkZW50aWZpZXI8L2tleT4KICAgICAgICAgICAgICAgIDxzdHJpbmc+QjA1MzYzRTItNTFGMS00MDE1LUI2ODgtMEZBQUNEREE0QjUxPC9zdHJpbmc+CiAgICAgICAgICAgICAgICA8a2V5PlBheWxvYWRVVUlEPC9rZXk+CiAgICAgICAgICAgICAgICA8c3RyaW5nPkIwNTM2M0UyLTUxRjEtNDAxNS1CNjg4LTBGQUFDRERBNEI1MTwvc3RyaW5nPgogICAgICAgICAgICAgICAgPGtleT5SdWxlczwva2V5PgogICAgICAgICAgICAgICAgPGFycmF5PgogICAgICAgICAgICAgICAgICAgIDxkaWN0PgogICAgICAgICAgICAgICAgICAgICAgICA8a2V5PlJ1bGVUeXBlPC9rZXk+CiAgICAgICAgICAgICAgICAgICAgICAgIDxzdHJpbmc+TGFiZWxQcmVmaXg8L3N0cmluZz4KICAgICAgICAgICAgICAgICAgICAgICAgPGtleT5SdWxlVmFsdWU8L2tleT4KICAgICAgICAgICAgICAgICAgICAgICAgPHN0cmluZz5jb20ubWljcm9zb2Z0Lk9uZURyaXZlU3RhbmRhbG9uZVVwZGF0ZXJEYWVtb248L3N0cmluZz4KICAgICAgICAgICAgICAgICAgICA8L2RpY3Q+CiAgICAgICAgICAgICAgICAgICAgPGRpY3Q+CiAgICAgICAgICAgICAgICAgICAgICAgIDxrZXk+UnVsZVR5cGU8L2tleT4KICAgICAgICAgICAgICAgICAgICAgICAgPHN0cmluZz5MYWJlbFByZWZpeDwvc3RyaW5nPgogICAgICAgICAgICAgICAgICAgICAgICA8a2V5PlJ1bGVWYWx1ZTwva2V5PgogICAgICAgICAgICAgICAgICAgICAgICA8c3RyaW5nPmNvbS5taWNyb3NvZnQuT25lRHJpdmVVcGRhdGVyRGFlbW9uPC9zdHJpbmc+CiAgICAgICAgICAgICAgICAgICAgPC9kaWN0PgogICAgICAgICAgICAgICAgICAgIDxkaWN0PgogICAgICAgICAgICAgICAgICAgICAgICA8a2V5PlJ1bGVUeXBlPC9rZXk+CiAgICAgICAgICAgICAgICAgICAgICAgIDxzdHJpbmc+TGFiZWxQcmVmaXg8L3N0cmluZz4KICAgICAgICAgICAgICAgICAgICAgICAgPGtleT5SdWxlVmFsdWU8L2tleT4KICAgICAgICAgICAgICAgICAgICAgICAgPHN0cmluZz5jb20ubWljcm9zb2Z0LnN5bmNyZXBvcnRlcjwvc3RyaW5nPgogICAgICAgICAgICAgICAgICAgIDwvZGljdD4KICAgICAgICAgICAgICAgIDwvYXJyYXk+CiAgICAgICAgICAgICAgICA8a2V5PlBheWxvYWRUeXBlPC9rZXk+CiAgICAgICAgICAgICAgICA8c3RyaW5nPmNvbS5hcHBsZS5zZXJ2aWNlbWFuYWdlbWVudDwvc3RyaW5nPgogICAgICAgICAgICAgICAgPGtleT5QYXlsb2FkRGlzcGxheU5hbWU8L2tleT4KICAgICAgICAgICAgICAgIDxzdHJpbmc+QmFja2dyb3VuZCBTZXJ2aWNlIE1hbmFnZW1lbnQgZm9yIE1pY3Jvc29mdCBPbmVEcml2ZTwvc3RyaW5nPgogICAgICAgICAgICA8L2RpY3Q+CiAgICAgICAgPC9hcnJheT4KICAgIDwvZGljdD4KPC9wbGlzdD4K",
+  "deploymentChannel@odata.type": "#microsoft.graph.appleDeploymentChannel",
+  "deploymentChannel": "deviceChannel",
+  "assignments@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/deviceConfigurations('ed884a23-7cf2-477a-be88-7aac74114c3c')/microsoft.graph.macOSCustomConfiguration/assignments",
+  "assignments@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ed884a23-7cf2-477a-be88-7aac74114c3c')/microsoft.graph.macOSCustomConfiguration/assignments/$ref",
+  "assignments@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ed884a23-7cf2-477a-be88-7aac74114c3c')/microsoft.graph.macOSCustomConfiguration/assignments",
+  "deviceSettingStateSummaries@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ed884a23-7cf2-477a-be88-7aac74114c3c')/microsoft.graph.macOSCustomConfiguration/deviceSettingStateSummaries/$ref",
+  "deviceSettingStateSummaries@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ed884a23-7cf2-477a-be88-7aac74114c3c')/microsoft.graph.macOSCustomConfiguration/deviceSettingStateSummaries",
+  "deviceStatuses@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ed884a23-7cf2-477a-be88-7aac74114c3c')/microsoft.graph.macOSCustomConfiguration/deviceStatuses/$ref",
+  "deviceStatuses@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ed884a23-7cf2-477a-be88-7aac74114c3c')/microsoft.graph.macOSCustomConfiguration/deviceStatuses",
+  "deviceStatusOverview@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ed884a23-7cf2-477a-be88-7aac74114c3c')/microsoft.graph.macOSCustomConfiguration/deviceStatusOverview/$ref",
+  "deviceStatusOverview@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ed884a23-7cf2-477a-be88-7aac74114c3c')/microsoft.graph.macOSCustomConfiguration/deviceStatusOverview",
+  "groupAssignments@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ed884a23-7cf2-477a-be88-7aac74114c3c')/microsoft.graph.macOSCustomConfiguration/groupAssignments/$ref",
+  "groupAssignments@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ed884a23-7cf2-477a-be88-7aac74114c3c')/microsoft.graph.macOSCustomConfiguration/groupAssignments",
+  "userStatuses@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ed884a23-7cf2-477a-be88-7aac74114c3c')/microsoft.graph.macOSCustomConfiguration/userStatuses/$ref",
+  "userStatuses@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ed884a23-7cf2-477a-be88-7aac74114c3c')/microsoft.graph.macOSCustomConfiguration/userStatuses",
+  "userStatusOverview@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ed884a23-7cf2-477a-be88-7aac74114c3c')/microsoft.graph.macOSCustomConfiguration/userStatusOverview/$ref",
+  "userStatusOverview@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ed884a23-7cf2-477a-be88-7aac74114c3c')/microsoft.graph.macOSCustomConfiguration/userStatusOverview",
+  "#microsoft.graph.assign": {
+    "title": "microsoft.graph.assign",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ed884a23-7cf2-477a-be88-7aac74114c3c')/microsoft.graph.deviceConfiguration/microsoft.graph.assign"
+  },
+  "#microsoft.graph.assignedAccessMultiModeProfiles": {
+    "title": "microsoft.graph.assignedAccessMultiModeProfiles",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ed884a23-7cf2-477a-be88-7aac74114c3c')/microsoft.graph.deviceConfiguration/microsoft.graph.assignedAccessMultiModeProfiles"
+  },
+  "#microsoft.graph.windowsPrivacyAccessControls": {
+    "title": "microsoft.graph.windowsPrivacyAccessControls",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ed884a23-7cf2-477a-be88-7aac74114c3c')/microsoft.graph.deviceConfiguration/microsoft.graph.windowsPrivacyAccessControls"
+  },
+  "#microsoft.graph.getOmaSettingPlainTextValue": {
+    "title": "microsoft.graph.getOmaSettingPlainTextValue",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ed884a23-7cf2-477a-be88-7aac74114c3c')/microsoft.graph.deviceConfiguration/microsoft.graph.getOmaSettingPlainTextValue"
+  }
+}

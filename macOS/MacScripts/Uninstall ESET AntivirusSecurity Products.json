@@ -1,0 +1,42 @@
+{
+  "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/deviceShellScripts(assignments())/$entity",
+  "@odata.type": "#microsoft.graph.deviceShellScript",
+  "@odata.id": "deviceManagement/deviceShellScripts('1eb5efd7-5053-4adb-842d-71e27d8e5349')",
+  "@odata.editLink": "deviceManagement/deviceShellScripts('1eb5efd7-5053-4adb-842d-71e27d8e5349')",
+  "executionFrequency@odata.type": "#Duration",
+  "executionFrequency": "PT0S",
+  "retryCount": 0,
+  "blockExecutionNotifications": false,
+  "id": "1eb5efd7-5053-4adb-842d-71e27d8e5349",
+  "displayName": "Uninstall ESET Antivirus/Security Products",
+  "description": "This will look for either ESET Endpoint Antivirus or Security installed and then run the uisntaller silently before then removing leftover files.",
+  "scriptContent@odata.type": "#Binary",
+  "scriptContent": "IyEvYmluL2Jhc2gKCiMgUGF0aCB0byBFU0VUIEFudGl2aXJ1cyB1bmluc3RhbGxlcgpFU0VUX0FOVElWSVJVU19VTklOU1RBTExFUj0iL0FwcGxpY2F0aW9ucy9FU0VUIEVuZHBvaW50IEFudGl2aXJ1cy5hcHAvQ29udGVudHMvSGVscGVycy9Vbmluc3RhbGxlci5hcHAvQ29udGVudHMvU2NyaXB0cy91bmluc3RhbGwuc2giCgojIFBhdGggdG8gRVNFVCBTZWN1cml0eSB1bmluc3RhbGxlcgpFU0VUX1NFQ1VSSVRZX1VOSU5TVEFMTEVSPSIvQXBwbGljYXRpb25zL0VTRVQgRW5kcG9pbnQgU2VjdXJpdHkuYXBwL0NvbnRlbnRzL0hlbHBlcnMvVW5pbnN0YWxsZXIuYXBwL0NvbnRlbnRzL1NjcmlwdHMvdW5pbnN0YWxsLnNoIgoKIyBDaGVjayBmb3IgRVNFVCBBbnRpdmlydXMKaWYgWyAtZiAiJEVTRVRfQU5USVZJUlVTX1VOSU5TVEFMTEVSIiBdOyB0aGVuCiAgZWNobyAiRVNFVCBBbnRpdmlydXMgZm91bmQuIEluaXRpYXRpbmcgdW5pbnN0YWxsYXRpb24uLi4iCiAgc3VkbyAiJEVTRVRfQU5USVZJUlVTX1VOSU5TVEFMTEVSIgogIAogIGVjaG8gIkNsZWFuaW5nIHVwIEVTRVQgQW50aXZpcnVzIGxlZnRvdmVycy4uLiIKICBzdWRvIHJtIC1SZiAiL0FwcGxpY2F0aW9ucy9FU0VUIEVuZHBvaW50IEFudGl2aXJ1cy5hcHAvIgogIHN1ZG8gcm0gLVJmICIvTGlicmFyeS9MYXVuY2hBZ2VudHMvY29tLmVzZXQuZXNldHNfZ3VpLnBsaXN0IgogIHN1ZG8gcm0gLVJmICIvTGlicmFyeS9MYXVuY2hBZ2VudHMvY29tLmVzZXQuZmlyZXdhbGwucHJvbXB0LnBsaXN0IgogIAogIGVjaG8gIkVTRVQgQW50aXZpcnVzIHVuaW5zdGFsbGF0aW9uIGFuZCBjbGVhbnVwIGNvbXBsZXRlLiIKICAKIyBDaGVjayBmb3IgRVNFVCBTZWN1cml0eQplbGlmIFsgLWYgIiRFU0VUX1NFQ1VSSVRZX1VOSU5TVEFMTEVSIiBdOyB0aGVuCiAgZWNobyAiRVNFVCBTZWN1cml0eSBmb3VuZC4gSW5pdGlhdGluZyB1bmluc3RhbGxhdGlvbi4uLiIKICBzdWRvICIkRVNFVF9TRUNVUklUWV9VTklOU1RBTExFUiIKICAKICBlY2hvICJDbGVhbmluZyB1cCBFU0VUIFNlY3VyaXR5IGxlZnRvdmVycy4uLiIKICBzdWRvIHJtIC1SZiAiL0FwcGxpY2F0aW9ucy9FU0VUIEVuZHBvaW50IFNlY3VyaXR5LmFwcC8iCiAgc3VkbyBybSAtUmYgIi9MaWJyYXJ5L0xhdW5jaEFnZW50cy9jb20uZXNldC5lc2V0c19ndWkucGxpc3QiCiAgc3VkbyBybSAtUmYgIi9MaWJyYXJ5L0xhdW5jaEFnZW50cy9jb20uZXNldC5maXJld2FsbC5wcm9tcHQucGxpc3QiCiAgCiAgZWNobyAiRVNFVCBTZWN1cml0eSB1bmluc3RhbGxhdGlvbiBhbmQgY2xlYW51cCBjb21wbGV0ZS4iCiAgCiMgTmVpdGhlciBFU0VUIHByb2R1Y3QgZm91bmQKZWxzZQogIGVjaG8gIk5vIEVTRVQgcHJvZHVjdHMgZm91bmQuIEV4aXRpbmcuIgpmaQo=",
+  "createdDateTime@odata.type": "#DateTimeOffset",
+  "createdDateTime": "2023-08-16T13:59:54.0425125Z",
+  "lastModifiedDateTime@odata.type": "#DateTimeOffset",
+  "lastModifiedDateTime": "2023-08-17T10:39:03.7188321Z",
+  "runAsAccount@odata.type": "#microsoft.graph.runAsAccountType",
+  "runAsAccount": "system",
+  "fileName": "uninstall_eset.sh",
+  "roleScopeTagIds@odata.type": "#Collection(String)",
+  "roleScopeTagIds": [
+    "0"
+  ],
+  "assignments@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/deviceShellScripts('1eb5efd7-5053-4adb-842d-71e27d8e5349')/assignments",
+  "assignments@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceShellScripts('1eb5efd7-5053-4adb-842d-71e27d8e5349')/assignments/$ref",
+  "assignments@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceShellScripts('1eb5efd7-5053-4adb-842d-71e27d8e5349')/assignments",
+  "assignments": [],
+  "deviceRunStates@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceShellScripts('1eb5efd7-5053-4adb-842d-71e27d8e5349')/deviceRunStates/$ref",
+  "deviceRunStates@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceShellScripts('1eb5efd7-5053-4adb-842d-71e27d8e5349')/deviceRunStates",
+  "groupAssignments@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceShellScripts('1eb5efd7-5053-4adb-842d-71e27d8e5349')/groupAssignments/$ref",
+  "groupAssignments@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceShellScripts('1eb5efd7-5053-4adb-842d-71e27d8e5349')/groupAssignments",
+  "runSummary@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceShellScripts('1eb5efd7-5053-4adb-842d-71e27d8e5349')/runSummary/$ref",
+  "runSummary@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceShellScripts('1eb5efd7-5053-4adb-842d-71e27d8e5349')/runSummary",
+  "userRunStates@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceShellScripts('1eb5efd7-5053-4adb-842d-71e27d8e5349')/userRunStates/$ref",
+  "userRunStates@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceShellScripts('1eb5efd7-5053-4adb-842d-71e27d8e5349')/userRunStates",
+  "#microsoft.graph.assign": {
+    "title": "microsoft.graph.assign",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/deviceShellScripts('1eb5efd7-5053-4adb-842d-71e27d8e5349')/microsoft.graph.assign"
+  }
+}

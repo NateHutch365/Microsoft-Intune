@@ -1,0 +1,99 @@
+{
+  "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/intents(assignments(),settings())/$entity",
+  "@odata.type": "#microsoft.graph.deviceManagementIntent",
+  "@odata.id": "deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')",
+  "@odata.editLink": "deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')",
+  "id": "10d13a10-b59d-4483-bf2f-4792616139ec",
+  "displayName": "macOS - Baseline - Endpoint Security - Device - macOS Firewall",
+  "description": null,
+  "isAssigned": true,
+  "isMigratingToConfigurationPolicy": null,
+  "lastModifiedDateTime@odata.type": "#DateTimeOffset",
+  "lastModifiedDateTime": "2023-08-18T10:07:58.2163456Z",
+  "templateId": "5340aa10-47a8-4e67-893f-690984e4d5da",
+  "roleScopeTagIds@odata.type": "#Collection(String)",
+  "roleScopeTagIds": [
+    "0"
+  ],
+  "assignments@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/assignments",
+  "assignments@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/assignments/$ref",
+  "assignments@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/assignments",
+  "settings@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/settings",
+  "settings@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/settings/$ref",
+  "settings@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/settings",
+  "settings": [
+    {
+      "@odata.type": "#microsoft.graph.deviceManagementBooleanSettingInstance",
+      "@odata.id": "deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/settings('aac1866b-fd37-499b-b4e5-4bf6328eda08')",
+      "@odata.editLink": "deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/settings('aac1866b-fd37-499b-b4e5-4bf6328eda08')/microsoft.graph.deviceManagementBooleanSettingInstance",
+      "id": "aac1866b-fd37-499b-b4e5-4bf6328eda08",
+      "definitionId": "deviceConfiguration--macOSEndpointProtectionConfiguration_firewallEnabled",
+      "valueJson": "true",
+      "value": true
+    },
+    {
+      "@odata.type": "#microsoft.graph.deviceManagementBooleanSettingInstance",
+      "@odata.id": "deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/settings('89116d80-6a7c-4079-9013-6a135cd2f39e')",
+      "@odata.editLink": "deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/settings('89116d80-6a7c-4079-9013-6a135cd2f39e')/microsoft.graph.deviceManagementBooleanSettingInstance",
+      "id": "89116d80-6a7c-4079-9013-6a135cd2f39e",
+      "definitionId": "deviceConfiguration--macOSEndpointProtectionConfiguration_firewallEnableStealthMode",
+      "valueJson": "true",
+      "value": true
+    },
+    {
+      "@odata.type": "#microsoft.graph.deviceManagementCollectionSettingInstance",
+      "@odata.id": "deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/settings('462f5baf-7d2d-490a-9050-70e3ce9ee0cd')",
+      "@odata.editLink": "deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/settings('462f5baf-7d2d-490a-9050-70e3ce9ee0cd')/microsoft.graph.deviceManagementCollectionSettingInstance",
+      "id": "462f5baf-7d2d-490a-9050-70e3ce9ee0cd",
+      "definitionId": "deviceConfiguration--macOSEndpointProtectionConfiguration_firewallApplications",
+      "valueJson": "null",
+      "value@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/settings('462f5baf-7d2d-490a-9050-70e3ce9ee0cd')/microsoft.graph.deviceManagementCollectionSettingInstance/value/$ref",
+      "value@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/settings('462f5baf-7d2d-490a-9050-70e3ce9ee0cd')/microsoft.graph.deviceManagementCollectionSettingInstance/value"
+    },
+    {
+      "@odata.type": "#microsoft.graph.deviceManagementBooleanSettingInstance",
+      "@odata.id": "deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/settings('9e9a63b8-2325-48ce-9df6-9af0631031b4')",
+      "@odata.editLink": "deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/settings('9e9a63b8-2325-48ce-9df6-9af0631031b4')/microsoft.graph.deviceManagementBooleanSettingInstance",
+      "id": "9e9a63b8-2325-48ce-9df6-9af0631031b4",
+      "definitionId": "deviceConfiguration--macOSEndpointProtectionConfiguration_firewallBlockAllIncoming",
+      "valueJson": "false",
+      "value": false
+    }
+  ],
+  "categories@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/categories/$ref",
+  "categories@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/categories",
+  "deviceSettingStateSummaries@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/deviceSettingStateSummaries/$ref",
+  "deviceSettingStateSummaries@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/deviceSettingStateSummaries",
+  "deviceStates@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/deviceStates/$ref",
+  "deviceStates@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/deviceStates",
+  "deviceStateSummary@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/deviceStateSummary/$ref",
+  "deviceStateSummary@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/deviceStateSummary",
+  "userStates@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/userStates/$ref",
+  "userStates@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/userStates",
+  "userStateSummary@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/userStateSummary/$ref",
+  "userStateSummary@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/userStateSummary",
+  "#microsoft.graph.assign": {
+    "title": "microsoft.graph.assign",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/microsoft.graph.assign"
+  },
+  "#microsoft.graph.createCopy": {
+    "title": "microsoft.graph.createCopy",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/microsoft.graph.createCopy"
+  },
+  "#microsoft.graph.migrateToTemplate": {
+    "title": "microsoft.graph.migrateToTemplate",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/microsoft.graph.migrateToTemplate"
+  },
+  "#microsoft.graph.updateSettings": {
+    "title": "microsoft.graph.updateSettings",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/microsoft.graph.updateSettings"
+  },
+  "#microsoft.graph.compare(templateId)": {
+    "title": "microsoft.graph.compare",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/microsoft.graph.compare(templateId=@templateId)"
+  },
+  "#microsoft.graph.getCustomizedSettings": {
+    "title": "microsoft.graph.getCustomizedSettings",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/intents('10d13a10-b59d-4483-bf2f-4792616139ec')/microsoft.graph.getCustomizedSettings"
+  }
+}
