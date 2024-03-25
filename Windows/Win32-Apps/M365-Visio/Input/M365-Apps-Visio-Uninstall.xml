@@ -1,0 +1,8 @@
+<Configuration>
+  <Remove>
+    <Product ID="VisioProRetail">
+    </Product>
+  </Remove>
+  <Property Name="FORCEAPPSHUTDOWN" Value="TRUE" />
+  <Display Level="None" AcceptEULA="TRUE" />
+</Configuration>

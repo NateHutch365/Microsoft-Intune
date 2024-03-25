@@ -1,0 +1,14 @@
+<Configuration>
+  <Add Version="MatchInstalled">
+    <Product ID="VisioProRetail">
+      <Language ID="MatchInstalled" TargetProduct="O365ProPlusRetail" />
+    </Product>
+  </Add>
+  <Property Name="SharedComputerLicensing" Value="0" />
+  <Property Name="FORCEAPPSHUTDOWN" Value="TRUE" />
+  <Property Name="DeviceBasedLicensing" Value="0" />
+  <Property Name="SCLCacheOverride" Value="0" />
+  <Updates Enabled="TRUE" />
+  <Display Level="None" AcceptEULA="TRUE" />
+  <Logging Level="Standard" Path="%ProgramData%\Microsoft\IntuneManagementExtension\Logs\Intune-M365AppsProPlus\Intune-Visio\" />
+</Configuration>
