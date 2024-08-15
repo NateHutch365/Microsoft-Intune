@@ -26,7 +26,7 @@ This PowerShell script is designed to decrypt all BitLocker-encrypted drives on 
 - PowerShell
 - Administrative privileges (required to manage BitLocker)
 
-## Usage
+## Usage (local)
 
 1. Open PowerShell as an Administrator
 2. Navigate to the directory containing the script
@@ -34,6 +34,16 @@ This PowerShell script is designed to decrypt all BitLocker-encrypted drives on 
    ```
    .\BitLockerDecryptionScript.ps1
    ```
+
+## Usage (Intune)
+
+1. Create new Windows platform script
+2. Upload BitLockerDecryption.ps1
+3. Script settings should be:
+- Run this script using the logged on credentials: No
+- Enforce script signature check: No
+- Run script in 64 bit PowerShell Host: No
+4. Assign to device group
 
 ## How It Works
 
