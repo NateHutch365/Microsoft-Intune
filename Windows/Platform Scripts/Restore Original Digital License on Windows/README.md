@@ -10,6 +10,15 @@ The script checks if the Windows activation uses a GVLK. If it does, the script 
 - PowerShell 5.0 or higher
 - Administrative rights on the system
 
+### Intune
+1. Create new Windows platform script
+2. Upload RestoreOriginalDigitalLicense.ps1
+3. Script settings should be:
+- Run this script using the logged on credentials: No
+- Enforce script signature check: No
+- Run script in 64 bit PowerShell Host: No
+4. Assign to device group
+
 ### Running the Script
 1. Open PowerShell as an Administrator.
 2. Navigate to the directory containing the script.
