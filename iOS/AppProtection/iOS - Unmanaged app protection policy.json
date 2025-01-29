@@ -4,7 +4,7 @@
   "@odata.id": "deviceAppManagement/iosManagedAppProtections('T_2c409dd3-3578-43b5-88d9-8e4ababeb1e4')",
   "@odata.editLink": "deviceAppManagement/iosManagedAppProtections('T_2c409dd3-3578-43b5-88d9-8e4ababeb1e4')",
   "displayName": "iOS - Unmanaged app protection policy",
-  "description": "Subcontractors and personal devices not enrolled to Intune will be targeted by this policy.",
+  "description": "Personal devices not enrolled to Intune will be targeted by this policy.",
   "createdDateTime@odata.type": "#DateTimeOffset",
   "createdDateTime": "2025-01-20T22:27:30.6183287Z",
   "lastModifiedDateTime@odata.type": "#DateTimeOffset",
