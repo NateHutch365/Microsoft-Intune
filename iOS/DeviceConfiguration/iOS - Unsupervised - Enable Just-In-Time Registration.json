@@ -1,0 +1,94 @@
+{
+  "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/deviceConfigurations(assignments())/$entity",
+  "@odata.type": "#microsoft.graph.iosDeviceFeaturesConfiguration",
+  "@odata.id": "deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')",
+  "@odata.editLink": "deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.iosDeviceFeaturesConfiguration",
+  "id": "ecb16383-9d62-4b98-a826-e929a96632b6",
+  "lastModifiedDateTime@odata.type": "#DateTimeOffset",
+  "lastModifiedDateTime": "2025-01-23T10:44:05.0043846Z",
+  "roleScopeTagIds@odata.type": "#Collection(String)",
+  "roleScopeTagIds": [
+    "0"
+  ],
+  "supportsScopeTags": true,
+  "deviceManagementApplicabilityRuleOsEdition": null,
+  "deviceManagementApplicabilityRuleOsVersion": null,
+  "deviceManagementApplicabilityRuleDeviceMode": null,
+  "createdDateTime@odata.type": "#DateTimeOffset",
+  "createdDateTime": "2025-01-20T20:36:17.4585836Z",
+  "description": null,
+  "displayName": "iOS - Unsupervised - Enable Just-In-Time Registration",
+  "version": 3,
+  "assetTagTemplate": null,
+  "contentFilterSettings": null,
+  "lockScreenFootnote": null,
+  "homeScreenGridWidth": null,
+  "homeScreenGridHeight": null,
+  "singleSignOnSettings": null,
+  "wallpaperDisplayLocation@odata.type": "#microsoft.graph.iosWallpaperDisplayLocation",
+  "wallpaperDisplayLocation": "notConfigured",
+  "wallpaperImage": null,
+  "singleSignOnExtension": null,
+  "airPrintDestinations@odata.type": "#Collection(microsoft.graph.airPrintDestination)",
+  "airPrintDestinations": [],
+  "homeScreenDockIcons@odata.type": "#Collection(microsoft.graph.iosHomeScreenItem)",
+  "homeScreenDockIcons": [],
+  "homeScreenPages@odata.type": "#Collection(microsoft.graph.iosHomeScreenPage)",
+  "homeScreenPages": [],
+  "notificationSettings@odata.type": "#Collection(microsoft.graph.iosNotificationSettings)",
+  "notificationSettings": [],
+  "iosSingleSignOnExtension": {
+    "@odata.type": "#microsoft.graph.iosAzureAdSingleSignOnExtension",
+    "enableSharedDeviceMode": false,
+    "bundleIdAccessControlList@odata.type": "#Collection(String)",
+    "bundleIdAccessControlList": [],
+    "configurations@odata.type": "#Collection(microsoft.graph.keyTypedValuePair)",
+    "configurations": [
+      {
+        "@odata.type": "#microsoft.graph.keyStringValuePair",
+        "key": "device_registration",
+        "value": "{{DEVICEREGISTRATION}}"
+      },
+      {
+        "@odata.type": "#microsoft.graph.keyIntegerValuePair",
+        "key": "browser_sso_interaction_enabled",
+        "value": 1
+      }
+    ]
+  },
+  "assignments@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.iosDeviceFeaturesConfiguration/assignments",
+  "assignments@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.iosDeviceFeaturesConfiguration/assignments/$ref",
+  "assignments@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.iosDeviceFeaturesConfiguration/assignments",
+  "deviceSettingStateSummaries@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.iosDeviceFeaturesConfiguration/deviceSettingStateSummaries/$ref",
+  "deviceSettingStateSummaries@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.iosDeviceFeaturesConfiguration/deviceSettingStateSummaries",
+  "deviceStatuses@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.iosDeviceFeaturesConfiguration/deviceStatuses/$ref",
+  "deviceStatuses@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.iosDeviceFeaturesConfiguration/deviceStatuses",
+  "deviceStatusOverview@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.iosDeviceFeaturesConfiguration/deviceStatusOverview/$ref",
+  "deviceStatusOverview@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.iosDeviceFeaturesConfiguration/deviceStatusOverview",
+  "groupAssignments@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.iosDeviceFeaturesConfiguration/groupAssignments/$ref",
+  "groupAssignments@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.iosDeviceFeaturesConfiguration/groupAssignments",
+  "userStatuses@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.iosDeviceFeaturesConfiguration/userStatuses/$ref",
+  "userStatuses@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.iosDeviceFeaturesConfiguration/userStatuses",
+  "userStatusOverview@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.iosDeviceFeaturesConfiguration/userStatusOverview/$ref",
+  "userStatusOverview@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.iosDeviceFeaturesConfiguration/userStatusOverview",
+  "identityCertificateForClientAuthentication@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.iosDeviceFeaturesConfiguration/identityCertificateForClientAuthentication/$ref",
+  "identityCertificateForClientAuthentication@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.iosDeviceFeaturesConfiguration/identityCertificateForClientAuthentication",
+  "singleSignOnExtensionPkinitCertificate@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.iosDeviceFeaturesConfiguration/singleSignOnExtensionPkinitCertificate/$ref",
+  "singleSignOnExtensionPkinitCertificate@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.iosDeviceFeaturesConfiguration/singleSignOnExtensionPkinitCertificate",
+  "#microsoft.graph.assign": {
+    "title": "microsoft.graph.assign",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.deviceConfiguration/microsoft.graph.assign"
+  },
+  "#microsoft.graph.assignedAccessMultiModeProfiles": {
+    "title": "microsoft.graph.assignedAccessMultiModeProfiles",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.deviceConfiguration/microsoft.graph.assignedAccessMultiModeProfiles"
+  },
+  "#microsoft.graph.windowsPrivacyAccessControls": {
+    "title": "microsoft.graph.windowsPrivacyAccessControls",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.deviceConfiguration/microsoft.graph.windowsPrivacyAccessControls"
+  },
+  "#microsoft.graph.getOmaSettingPlainTextValue": {
+    "title": "microsoft.graph.getOmaSettingPlainTextValue",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('ecb16383-9d62-4b98-a826-e929a96632b6')/microsoft.graph.deviceConfiguration/microsoft.graph.getOmaSettingPlainTextValue"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/notificationMessageTemplates(localizedNotificationMessages())/$entity",
+  "@odata.type": "#microsoft.graph.notificationMessageTemplate",
+  "@odata.id": "deviceManagement/notificationMessageTemplates('f3d99c12-ee85-415f-be0e-89e331f76889')",
+  "@odata.editLink": "deviceManagement/notificationMessageTemplates('f3d99c12-ee85-415f-be0e-89e331f76889')",
+  "id": "f3d99c12-ee85-415f-be0e-89e331f76889",
+  "lastModifiedDateTime@odata.type": "#DateTimeOffset",
+  "lastModifiedDateTime": "2025-01-26T13:31:00Z",
+  "displayName": "#1 iOS compliance notification",
+  "description": null,
+  "defaultLocale": "en-gb",
+  "brandingOptions@odata.type": "#microsoft.graph.notificationTemplateBrandingOptions",
+  "brandingOptions": "includeCompanyLogo,includeCompanyName,includeContactInformation,includeCompanyPortalLink",
+  "roleScopeTagIds@odata.type": "#Collection(String)",
+  "roleScopeTagIds": [
+    "0"
+  ],
+  "localizedNotificationMessages@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/notificationMessageTemplates('f3d99c12-ee85-415f-be0e-89e331f76889')/localizedNotificationMessages",
+  "localizedNotificationMessages@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/notificationMessageTemplates('f3d99c12-ee85-415f-be0e-89e331f76889')/localizedNotificationMessages/$ref",
+  "localizedNotificationMessages@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/notificationMessageTemplates('f3d99c12-ee85-415f-be0e-89e331f76889')/localizedNotificationMessages",
+  "localizedNotificationMessages": [
+    {
+      "@odata.type": "#microsoft.graph.localizedNotificationMessage",
+      "@odata.id": "deviceManagement/notificationMessageTemplates('f3d99c12-ee85-415f-be0e-89e331f76889')/localizedNotificationMessages('f3d99c12-ee85-415f-be0e-89e331f76889_en-gb')",
+      "@odata.editLink": "deviceManagement/notificationMessageTemplates('f3d99c12-ee85-415f-be0e-89e331f76889')/localizedNotificationMessages('f3d99c12-ee85-415f-be0e-89e331f76889_en-gb')",
+      "id": "f3d99c12-ee85-415f-be0e-89e331f76889_en-gb",
+      "lastModifiedDateTime@odata.type": "#DateTimeOffset",
+      "lastModifiedDateTime": "2025-01-29T20:27:40.7973492Z",
+      "locale": "en-gb",
+      "subject": "Your Apple device {{DeviceName}} is not compliant",
+      "messageTemplate": "Hello {{UserName}},\r\n\r\nYour Apple iOS/iPad OS device {{DeviceName}} is not compliant. To ensure you do not lose access to company resources, please use the Company Portal link provided to check your access requirements and resolve outstanding issues.\r\n\r\nIf in doubt, please contact support by forwarding this email to itsupport@skillsedugroup.co.uk with your query.\r\n\r\nKind Regards,\r\nSkills and Education Group, IT Department",
+      "isDefault": true
+    }
+  ],
+  "#microsoft.graph.sendTestMessage": {
+    "title": "microsoft.graph.sendTestMessage",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/notificationMessageTemplates('f3d99c12-ee85-415f-be0e-89e331f76889')/microsoft.graph.sendTestMessage"
+  }
+}

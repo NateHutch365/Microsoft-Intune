@@ -1,0 +1,28 @@
+{
+  "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/assignmentFilters/$entity",
+  "@odata.type": "#microsoft.graph.deviceAndAppManagementAssignmentFilter",
+  "@odata.id": "deviceManagement/assignmentFilters('2e5109d8-1465-43cf-a146-12578bba18a6')",
+  "@odata.editLink": "deviceManagement/assignmentFilters('2e5109d8-1465-43cf-a146-12578bba18a6')",
+  "id": "2e5109d8-1465-43cf-a146-12578bba18a6",
+  "createdDateTime@odata.type": "#DateTimeOffset",
+  "createdDateTime": "2025-01-20T22:09:24.8033054Z",
+  "lastModifiedDateTime@odata.type": "#DateTimeOffset",
+  "lastModifiedDateTime": "2025-01-20T22:09:24.8033054Z",
+  "displayName": "iOS unmanaged devices",
+  "description": "",
+  "platform@odata.type": "#microsoft.graph.devicePlatformType",
+  "platform": "iOSMobileApplicationManagement",
+  "rule": "(app.deviceManagementType -eq \"Unmanaged\")",
+  "roleScopeTags@odata.type": "#Collection(String)",
+  "roleScopeTags": [
+    "0"
+  ],
+  "assignmentFilterManagementType@odata.type": "#microsoft.graph.assignmentFilterManagementType",
+  "assignmentFilterManagementType": "apps",
+  "payloads@odata.type": "#Collection(microsoft.graph.payloadByFilter)",
+  "payloads": [],
+  "#microsoft.graph.getSupportedProperties": {
+    "title": "microsoft.graph.getSupportedProperties",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/assignmentFilters('2e5109d8-1465-43cf-a146-12578bba18a6')/microsoft.graph.getSupportedProperties"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceAppManagement/mobileAppConfigurations(assignments())/$entity",
+  "@odata.type": "#microsoft.graph.androidManagedStoreAppConfiguration",
+  "@odata.id": "deviceAppManagement/mobileAppConfigurations('bf0e3fcd-db68-44e7-a826-d8720adfbc62')",
+  "@odata.editLink": "deviceAppManagement/mobileAppConfigurations('bf0e3fcd-db68-44e7-a826-d8720adfbc62')/microsoft.graph.androidManagedStoreAppConfiguration",
+  "id": "bf0e3fcd-db68-44e7-a826-d8720adfbc62",
+  "targetedMobileApps@odata.type": "#Collection(String)",
+  "targetedMobileApps": [
+    "aadb2e48-4fa5-4dcb-8219-f111a397edea"
+  ],
+  "roleScopeTagIds@odata.type": "#Collection(String)",
+  "roleScopeTagIds": [
+    "0"
+  ],
+  "createdDateTime@odata.type": "#DateTimeOffset",
+  "createdDateTime": "2025-01-21T14:55:34.7270002Z",
+  "description": "This policy will apply the required configuration keys to allow low touch onboarding to MDE for all MDM managed Android devices.",
+  "lastModifiedDateTime@odata.type": "#DateTimeOffset",
+  "lastModifiedDateTime": "2025-01-26T20:54:36.0167042Z",
+  "displayName": "Android - All Profile Types - Low touch onboarding for MDE",
+  "version": 4,
+  "packageId": "app:com.microsoft.scmx",
+  "payloadJson": "eyJraW5kIjoiYW5kcm9pZGVudGVycHJpc2UjbWFuYWdlZENvbmZpZ3VyYXRpb24iLCJwcm9kdWN0SWQiOiJhcHA6Y29tLm1pY3Jvc29mdC5zY214IiwibWFuYWdlZFByb3BlcnR5IjpbeyJrZXkiOiJVc2VyVVBOIiwidmFsdWVTdHJpbmciOiJ7e3VzZXJwcmluY2lwYWxuYW1lfX0ifSx7ImtleSI6InZwbiIsInZhbHVlSW50ZWdlciI6MX0seyJrZXkiOiJhbnRpcGhpc2hpbmciLCJ2YWx1ZUludGVnZXIiOjF9LHsia2V5IjoiRW5hYmxlTG93VG91Y2hPbmJvYXJkaW5nIiwidmFsdWVJbnRlZ2VyIjoxfV19",
+  "appSupportsOemConfig": false,
+  "profileApplicability@odata.type": "#microsoft.graph.androidProfileApplicability",
+  "profileApplicability": "default",
+  "connectedAppsEnabled": false,
+  "permissionActions@odata.type": "#Collection(microsoft.graph.androidPermissionAction)",
+  "permissionActions": [
+    {
+      "@odata.type": "#microsoft.graph.androidPermissionAction",
+      "permission": "android.permission.POST_NOTIFICATIONS",
+      "action@odata.type": "#microsoft.graph.androidPermissionActionType",
+      "action": "autoGrant"
+    },
+    {
+      "@odata.type": "#microsoft.graph.androidPermissionAction",
+      "permission": "android.permission.ACCESS_FINE_LOCATION",
+      "action@odata.type": "#microsoft.graph.androidPermissionActionType",
+      "action": "autoGrant"
+    }
+  ],
+  "assignments@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceAppManagement/mobileAppConfigurations('bf0e3fcd-db68-44e7-a826-d8720adfbc62')/microsoft.graph.androidManagedStoreAppConfiguration/assignments",
+  "assignments@odata.associationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('bf0e3fcd-db68-44e7-a826-d8720adfbc62')/microsoft.graph.androidManagedStoreAppConfiguration/assignments/$ref",
+  "assignments@odata.navigationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('bf0e3fcd-db68-44e7-a826-d8720adfbc62')/microsoft.graph.androidManagedStoreAppConfiguration/assignments",
+  "deviceStatuses@odata.associationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('bf0e3fcd-db68-44e7-a826-d8720adfbc62')/microsoft.graph.androidManagedStoreAppConfiguration/deviceStatuses/$ref",
+  "deviceStatuses@odata.navigationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('bf0e3fcd-db68-44e7-a826-d8720adfbc62')/microsoft.graph.androidManagedStoreAppConfiguration/deviceStatuses",
+  "deviceStatusSummary@odata.associationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('bf0e3fcd-db68-44e7-a826-d8720adfbc62')/microsoft.graph.androidManagedStoreAppConfiguration/deviceStatusSummary/$ref",
+  "deviceStatusSummary@odata.navigationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('bf0e3fcd-db68-44e7-a826-d8720adfbc62')/microsoft.graph.androidManagedStoreAppConfiguration/deviceStatusSummary",
+  "userStatuses@odata.associationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('bf0e3fcd-db68-44e7-a826-d8720adfbc62')/microsoft.graph.androidManagedStoreAppConfiguration/userStatuses/$ref",
+  "userStatuses@odata.navigationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('bf0e3fcd-db68-44e7-a826-d8720adfbc62')/microsoft.graph.androidManagedStoreAppConfiguration/userStatuses",
+  "userStatusSummary@odata.associationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('bf0e3fcd-db68-44e7-a826-d8720adfbc62')/microsoft.graph.androidManagedStoreAppConfiguration/userStatusSummary/$ref",
+  "userStatusSummary@odata.navigationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('bf0e3fcd-db68-44e7-a826-d8720adfbc62')/microsoft.graph.androidManagedStoreAppConfiguration/userStatusSummary",
+  "#microsoft.graph.assign": {
+    "title": "microsoft.graph.assign",
+    "target": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('bf0e3fcd-db68-44e7-a826-d8720adfbc62')/microsoft.graph.managedDeviceMobileAppConfiguration/microsoft.graph.assign"
+  },
+  "#CustomRefTargetedApps": "Microsoft Defender: Antivirus|!|aadb2e48-4fa5-4dcb-8219-f111a397edea|!|#microsoft.graph.androidManagedStoreApp"
+}

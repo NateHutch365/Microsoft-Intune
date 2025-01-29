@@ -1,0 +1,49 @@
+{
+  "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceAppManagement/mobileAppConfigurations(assignments())/$entity",
+  "@odata.type": "#microsoft.graph.iosMobileAppConfiguration",
+  "@odata.id": "deviceAppManagement/mobileAppConfigurations('d28040ee-f8d0-42b6-918a-22b5b4eec404')",
+  "@odata.editLink": "deviceAppManagement/mobileAppConfigurations('d28040ee-f8d0-42b6-918a-22b5b4eec404')/microsoft.graph.iosMobileAppConfiguration",
+  "id": "d28040ee-f8d0-42b6-918a-22b5b4eec404",
+  "targetedMobileApps@odata.type": "#Collection(String)",
+  "targetedMobileApps": [
+    "19a7f7e6-5452-44f5-aee1-8f6796157cb2"
+  ],
+  "roleScopeTagIds@odata.type": "#Collection(String)",
+  "roleScopeTagIds": [
+    "0"
+  ],
+  "createdDateTime@odata.type": "#DateTimeOffset",
+  "createdDateTime": "2025-01-24T11:37:53.5025593Z",
+  "description": "To differentiate between devices that are managed and unmanaged, a configuration key is required, this ensures that devices receive the correct app protection policy, as unmanaged devices may have stricter controls.\n\nThis policy sets the required configuration key for MDM managed devices, ensuring they receive the managed app protection policy.",
+  "lastModifiedDateTime@odata.type": "#DateTimeOffset",
+  "lastModifiedDateTime": "2025-01-26T20:50:38.9608408Z",
+  "displayName": "iOS - Unsupervised - SharePoint - IntuneMAMUPN",
+  "version": 2,
+  "encodedSettingXml": null,
+  "settings@odata.type": "#Collection(microsoft.graph.appConfigurationSettingItem)",
+  "settings": [
+    {
+      "@odata.type": "#microsoft.graph.appConfigurationSettingItem",
+      "appConfigKey": "IntuneMAMUPN",
+      "appConfigKeyType@odata.type": "#microsoft.graph.mdmAppConfigKeyType",
+      "appConfigKeyType": "stringType",
+      "appConfigKeyValue": "{{UserPrincipalName}}"
+    }
+  ],
+  "assignments@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceAppManagement/mobileAppConfigurations('d28040ee-f8d0-42b6-918a-22b5b4eec404')/microsoft.graph.iosMobileAppConfiguration/assignments",
+  "assignments@odata.associationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('d28040ee-f8d0-42b6-918a-22b5b4eec404')/microsoft.graph.iosMobileAppConfiguration/assignments/$ref",
+  "assignments@odata.navigationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('d28040ee-f8d0-42b6-918a-22b5b4eec404')/microsoft.graph.iosMobileAppConfiguration/assignments",
+  "deviceStatuses@odata.associationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('d28040ee-f8d0-42b6-918a-22b5b4eec404')/microsoft.graph.iosMobileAppConfiguration/deviceStatuses/$ref",
+  "deviceStatuses@odata.navigationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('d28040ee-f8d0-42b6-918a-22b5b4eec404')/microsoft.graph.iosMobileAppConfiguration/deviceStatuses",
+  "deviceStatusSummary@odata.associationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('d28040ee-f8d0-42b6-918a-22b5b4eec404')/microsoft.graph.iosMobileAppConfiguration/deviceStatusSummary/$ref",
+  "deviceStatusSummary@odata.navigationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('d28040ee-f8d0-42b6-918a-22b5b4eec404')/microsoft.graph.iosMobileAppConfiguration/deviceStatusSummary",
+  "userStatuses@odata.associationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('d28040ee-f8d0-42b6-918a-22b5b4eec404')/microsoft.graph.iosMobileAppConfiguration/userStatuses/$ref",
+  "userStatuses@odata.navigationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('d28040ee-f8d0-42b6-918a-22b5b4eec404')/microsoft.graph.iosMobileAppConfiguration/userStatuses",
+  "userStatusSummary@odata.associationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('d28040ee-f8d0-42b6-918a-22b5b4eec404')/microsoft.graph.iosMobileAppConfiguration/userStatusSummary/$ref",
+  "userStatusSummary@odata.navigationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('d28040ee-f8d0-42b6-918a-22b5b4eec404')/microsoft.graph.iosMobileAppConfiguration/userStatusSummary",
+  "#microsoft.graph.assign": {
+    "title": "microsoft.graph.assign",
+    "target": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('d28040ee-f8d0-42b6-918a-22b5b4eec404')/microsoft.graph.managedDeviceMobileAppConfiguration/microsoft.graph.assign"
+  },
+  "#CustomRefTargetedApps": "Microsoft SharePoint|!|19a7f7e6-5452-44f5-aee1-8f6796157cb2|!|#microsoft.graph.iosStoreApp"
+}

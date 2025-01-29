@@ -1,0 +1,46 @@
+{
+  "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceAppManagement/mobileAppConfigurations(assignments())/$entity",
+  "@odata.type": "#microsoft.graph.androidManagedStoreAppConfiguration",
+  "@odata.id": "deviceAppManagement/mobileAppConfigurations('85b37b6f-1d9e-4dd6-8bb4-ef4fbb90bf11')",
+  "@odata.editLink": "deviceAppManagement/mobileAppConfigurations('85b37b6f-1d9e-4dd6-8bb4-ef4fbb90bf11')/microsoft.graph.androidManagedStoreAppConfiguration",
+  "id": "85b37b6f-1d9e-4dd6-8bb4-ef4fbb90bf11",
+  "targetedMobileApps@odata.type": "#Collection(String)",
+  "targetedMobileApps": [
+    "6a0de0c3-a610-431d-af21-5e434a1ee464"
+  ],
+  "roleScopeTagIds@odata.type": "#Collection(String)",
+  "roleScopeTagIds": [
+    "0"
+  ],
+  "createdDateTime@odata.type": "#DateTimeOffset",
+  "createdDateTime": "2025-01-21T14:42:12.3110902Z",
+  "description": "This policy will automatically configure Outlook to company requirements on all MDM managed Android devices.",
+  "lastModifiedDateTime@odata.type": "#DateTimeOffset",
+  "lastModifiedDateTime": "2025-01-26T20:53:54.2001845Z",
+  "displayName": "Android - All Profile Types - Outlook auto configuration",
+  "version": 3,
+  "packageId": "app:com.microsoft.office.outlook",
+  "payloadJson": "eyJraW5kIjoiYW5kcm9pZGVudGVycHJpc2UjbWFuYWdlZENvbmZpZ3VyYXRpb24iLCJwcm9kdWN0SWQiOiJhcHA6Y29tLm1pY3Jvc29mdC5vZmZpY2Uub3V0bG9vayIsIm1hbmFnZWRQcm9wZXJ0eSI6W3sia2V5IjoiY29tLm1pY3Jvc29mdC5vdXRsb29rLkVtYWlsUHJvZmlsZS5BY2NvdW50VHlwZSIsInZhbHVlU3RyaW5nIjoiTW9kZXJuQXV0aCJ9LHsia2V5IjoiY29tLm1pY3Jvc29mdC5vdXRsb29rLkVtYWlsUHJvZmlsZS5FbWFpbFVQTiIsInZhbHVlU3RyaW5nIjoie3t1c2VycHJpbmNpcGFsbmFtZX19In0seyJrZXkiOiJjb20ubWljcm9zb2Z0Lm91dGxvb2suRW1haWxQcm9maWxlLkVtYWlsQWRkcmVzcyIsInZhbHVlU3RyaW5nIjoie3ttYWlsfX0ifSx7ImtleSI6ImNvbS5taWNyb3NvZnQub3V0bG9vay5NYWlsLkZvY3VzZWRJbmJveCIsInZhbHVlQm9vbCI6ZmFsc2V9LHsia2V5IjoiY29tLm1pY3Jvc29mdC5vdXRsb29rLk1haWwuT2ZmaWNlRmVlZEVuYWJsZWQiLCJ2YWx1ZUJvb2wiOnRydWV9LHsia2V5IjoiY29tLm1pY3Jvc29mdC5vdXRsb29rLk1haWwuU3VnZ2VzdGVkUmVwbGllc0VuYWJsZWQiLCJ2YWx1ZUJvb2wiOnRydWV9LHsia2V5IjoiY29tLm1pY3Jvc29mdC5vdXRsb29rLk1haWwuRXh0ZXJuYWxSZWNpcGllbnRzVG9vbFRpcEVuYWJsZWQiLCJ2YWx1ZUJvb2wiOnRydWV9LHsia2V5IjoiY29tLm1pY3Jvc29mdC5vdXRsb29rLk1haWwuRGVmYXVsdFNpZ25hdHVyZUVuYWJsZWQiLCJ2YWx1ZUJvb2wiOmZhbHNlfSx7ImtleSI6ImNvbS5taWNyb3NvZnQub3V0bG9vay5NYWlsLk9yZ2FuaXplQnlUaHJlYWRFbmFibGVkIiwidmFsdWVCb29sIjpmYWxzZX1dfQ==",
+  "appSupportsOemConfig": false,
+  "profileApplicability@odata.type": "#microsoft.graph.androidProfileApplicability",
+  "profileApplicability": "default",
+  "connectedAppsEnabled": false,
+  "permissionActions@odata.type": "#Collection(microsoft.graph.androidPermissionAction)",
+  "permissionActions": [],
+  "assignments@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceAppManagement/mobileAppConfigurations('85b37b6f-1d9e-4dd6-8bb4-ef4fbb90bf11')/microsoft.graph.androidManagedStoreAppConfiguration/assignments",
+  "assignments@odata.associationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('85b37b6f-1d9e-4dd6-8bb4-ef4fbb90bf11')/microsoft.graph.androidManagedStoreAppConfiguration/assignments/$ref",
+  "assignments@odata.navigationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('85b37b6f-1d9e-4dd6-8bb4-ef4fbb90bf11')/microsoft.graph.androidManagedStoreAppConfiguration/assignments",
+  "deviceStatuses@odata.associationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('85b37b6f-1d9e-4dd6-8bb4-ef4fbb90bf11')/microsoft.graph.androidManagedStoreAppConfiguration/deviceStatuses/$ref",
+  "deviceStatuses@odata.navigationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('85b37b6f-1d9e-4dd6-8bb4-ef4fbb90bf11')/microsoft.graph.androidManagedStoreAppConfiguration/deviceStatuses",
+  "deviceStatusSummary@odata.associationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('85b37b6f-1d9e-4dd6-8bb4-ef4fbb90bf11')/microsoft.graph.androidManagedStoreAppConfiguration/deviceStatusSummary/$ref",
+  "deviceStatusSummary@odata.navigationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('85b37b6f-1d9e-4dd6-8bb4-ef4fbb90bf11')/microsoft.graph.androidManagedStoreAppConfiguration/deviceStatusSummary",
+  "userStatuses@odata.associationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('85b37b6f-1d9e-4dd6-8bb4-ef4fbb90bf11')/microsoft.graph.androidManagedStoreAppConfiguration/userStatuses/$ref",
+  "userStatuses@odata.navigationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('85b37b6f-1d9e-4dd6-8bb4-ef4fbb90bf11')/microsoft.graph.androidManagedStoreAppConfiguration/userStatuses",
+  "userStatusSummary@odata.associationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('85b37b6f-1d9e-4dd6-8bb4-ef4fbb90bf11')/microsoft.graph.androidManagedStoreAppConfiguration/userStatusSummary/$ref",
+  "userStatusSummary@odata.navigationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('85b37b6f-1d9e-4dd6-8bb4-ef4fbb90bf11')/microsoft.graph.androidManagedStoreAppConfiguration/userStatusSummary",
+  "#microsoft.graph.assign": {
+    "title": "microsoft.graph.assign",
+    "target": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('85b37b6f-1d9e-4dd6-8bb4-ef4fbb90bf11')/microsoft.graph.managedDeviceMobileAppConfiguration/microsoft.graph.assign"
+  },
+  "#CustomRefTargetedApps": "Microsoft Outlook|!|6a0de0c3-a610-431d-af21-5e434a1ee464|!|#microsoft.graph.androidManagedStoreApp"
+}

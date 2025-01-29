@@ -1,0 +1,28 @@
+{
+  "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/assignmentFilters/$entity",
+  "@odata.type": "#microsoft.graph.deviceAndAppManagementAssignmentFilter",
+  "@odata.id": "deviceManagement/assignmentFilters('a514ab76-bb51-4063-936a-a010ad92dbc2')",
+  "@odata.editLink": "deviceManagement/assignmentFilters('a514ab76-bb51-4063-936a-a010ad92dbc2')",
+  "id": "a514ab76-bb51-4063-936a-a010ad92dbc2",
+  "createdDateTime@odata.type": "#DateTimeOffset",
+  "createdDateTime": "2025-01-23T13:08:51.5328025Z",
+  "lastModifiedDateTime@odata.type": "#DateTimeOffset",
+  "lastModifiedDateTime": "2025-01-23T13:08:51.5328025Z",
+  "displayName": "Android fully managed devices",
+  "description": "",
+  "platform@odata.type": "#microsoft.graph.devicePlatformType",
+  "platform": "androidForWork",
+  "rule": "(device.enrollmentProfileName -eq \"Fully Managed Android\")",
+  "roleScopeTags@odata.type": "#Collection(String)",
+  "roleScopeTags": [
+    "0"
+  ],
+  "assignmentFilterManagementType@odata.type": "#microsoft.graph.assignmentFilterManagementType",
+  "assignmentFilterManagementType": "devices",
+  "payloads@odata.type": "#Collection(microsoft.graph.payloadByFilter)",
+  "payloads": [],
+  "#microsoft.graph.getSupportedProperties": {
+    "title": "microsoft.graph.getSupportedProperties",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/assignmentFilters('a514ab76-bb51-4063-936a-a010ad92dbc2')/microsoft.graph.getSupportedProperties"
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/deviceConfigurations(assignments())/$entity",
+  "@odata.type": "#microsoft.graph.iosVpnConfiguration",
+  "@odata.id": "deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')",
+  "@odata.editLink": "deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.iosVpnConfiguration",
+  "id": "8ee5b1bf-feef-49a8-85f8-83350f52f60b",
+  "lastModifiedDateTime@odata.type": "#DateTimeOffset",
+  "lastModifiedDateTime": "2025-01-23T10:44:27.7050977Z",
+  "roleScopeTagIds@odata.type": "#Collection(String)",
+  "roleScopeTagIds": [
+    "0"
+  ],
+  "supportsScopeTags": true,
+  "deviceManagementApplicabilityRuleOsEdition": null,
+  "deviceManagementApplicabilityRuleOsVersion": null,
+  "deviceManagementApplicabilityRuleDeviceMode": null,
+  "createdDateTime@odata.type": "#DateTimeOffset",
+  "createdDateTime": "2025-01-21T12:30:45.38396Z",
+  "description": null,
+  "displayName": "iOS - Unsupervised - Loopback VPN for MDE",
+  "version": 3,
+  "connectionName": "Microsoft Defender for Endpoint",
+  "connectionType@odata.type": "#microsoft.graph.appleVpnConnectionType",
+  "connectionType": "customVpn",
+  "loginGroupOrDomain": null,
+  "role": null,
+  "realm": null,
+  "identifier": "com.microsoft.scmx",
+  "enableSplitTunneling": false,
+  "authenticationMethod@odata.type": "#microsoft.graph.vpnAuthenticationMethod",
+  "authenticationMethod": "usernameAndPassword",
+  "enablePerApp": false,
+  "safariDomains@odata.type": "#Collection(String)",
+  "safariDomains": [],
+  "providerType": null,
+  "associatedDomains@odata.type": "#Collection(String)",
+  "associatedDomains": [],
+  "excludedDomains@odata.type": "#Collection(String)",
+  "excludedDomains": [],
+  "disableOnDemandUserOverride": true,
+  "disconnectOnIdle": null,
+  "disconnectOnIdleTimerInSeconds": null,
+  "proxyServer": null,
+  "optInToDeviceIdSharing": null,
+  "userDomain": null,
+  "strictEnforcement": null,
+  "cloudName": null,
+  "excludeList@odata.type": "#Collection(String)",
+  "excludeList": [],
+  "microsoftTunnelSiteId": null,
+  "server": {
+    "@odata.type": "#microsoft.graph.vpnServer",
+    "description": "server",
+    "address": "127.0.0.1",
+    "isDefaultServer": true
+  },
+  "customData@odata.type": "#Collection(microsoft.graph.keyValue)",
+  "customData": [
+    {
+      "@odata.type": "#microsoft.graph.keyValue",
+      "key": "SilentOnboard",
+      "value": "True"
+    }
+  ],
+  "customKeyValueData@odata.type": "#Collection(microsoft.graph.keyValuePair)",
+  "customKeyValueData": [
+    {
+      "@odata.type": "#microsoft.graph.keyValuePair",
+      "name": "SilentOnboard",
+      "value": "True"
+    }
+  ],
+  "onDemandRules@odata.type": "#Collection(microsoft.graph.vpnOnDemandRule)",
+  "onDemandRules": [
+    {
+      "@odata.type": "#microsoft.graph.vpnOnDemandRule",
+      "ssids@odata.type": "#Collection(String)",
+      "ssids": [],
+      "dnsSearchDomains@odata.type": "#Collection(String)",
+      "dnsSearchDomains": [],
+      "probeUrl": null,
+      "action@odata.type": "#microsoft.graph.vpnOnDemandRuleConnectionAction",
+      "action": "connect",
+      "domainAction@odata.type": "#microsoft.graph.vpnOnDemandRuleConnectionDomainAction",
+      "domainAction": "connectIfNeeded",
+      "domains@odata.type": "#Collection(String)",
+      "domains": [],
+      "probeRequiredUrl": null,
+      "interfaceTypeMatch@odata.type": "#microsoft.graph.vpnOnDemandRuleInterfaceTypeMatch",
+      "interfaceTypeMatch": "notConfigured",
+      "dnsServerAddressMatch@odata.type": "#Collection(String)",
+      "dnsServerAddressMatch": []
+    }
+  ],
+  "targetedMobileApps@odata.type": "#Collection(microsoft.graph.appListItem)",
+  "targetedMobileApps": [],
+  "assignments@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.iosVpnConfiguration/assignments",
+  "assignments@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.iosVpnConfiguration/assignments/$ref",
+  "assignments@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.iosVpnConfiguration/assignments",
+  "deviceSettingStateSummaries@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.iosVpnConfiguration/deviceSettingStateSummaries/$ref",
+  "deviceSettingStateSummaries@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.iosVpnConfiguration/deviceSettingStateSummaries",
+  "deviceStatuses@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.iosVpnConfiguration/deviceStatuses/$ref",
+  "deviceStatuses@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.iosVpnConfiguration/deviceStatuses",
+  "deviceStatusOverview@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.iosVpnConfiguration/deviceStatusOverview/$ref",
+  "deviceStatusOverview@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.iosVpnConfiguration/deviceStatusOverview",
+  "groupAssignments@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.iosVpnConfiguration/groupAssignments/$ref",
+  "groupAssignments@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.iosVpnConfiguration/groupAssignments",
+  "userStatuses@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.iosVpnConfiguration/userStatuses/$ref",
+  "userStatuses@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.iosVpnConfiguration/userStatuses",
+  "userStatusOverview@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.iosVpnConfiguration/userStatusOverview/$ref",
+  "userStatusOverview@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.iosVpnConfiguration/userStatusOverview",
+  "derivedCredentialSettings@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.iosVpnConfiguration/derivedCredentialSettings/$ref",
+  "derivedCredentialSettings@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.iosVpnConfiguration/derivedCredentialSettings",
+  "identityCertificate@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.iosVpnConfiguration/identityCertificate/$ref",
+  "identityCertificate@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.iosVpnConfiguration/identityCertificate",
+  "#microsoft.graph.assign": {
+    "title": "microsoft.graph.assign",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.deviceConfiguration/microsoft.graph.assign"
+  },
+  "#microsoft.graph.assignedAccessMultiModeProfiles": {
+    "title": "microsoft.graph.assignedAccessMultiModeProfiles",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.deviceConfiguration/microsoft.graph.assignedAccessMultiModeProfiles"
+  },
+  "#microsoft.graph.windowsPrivacyAccessControls": {
+    "title": "microsoft.graph.windowsPrivacyAccessControls",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.deviceConfiguration/microsoft.graph.windowsPrivacyAccessControls"
+  },
+  "#microsoft.graph.getOmaSettingPlainTextValue": {
+    "title": "microsoft.graph.getOmaSettingPlainTextValue",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/deviceConfigurations('8ee5b1bf-feef-49a8-85f8-83350f52f60b')/microsoft.graph.deviceConfiguration/microsoft.graph.getOmaSettingPlainTextValue"
+  }
+}

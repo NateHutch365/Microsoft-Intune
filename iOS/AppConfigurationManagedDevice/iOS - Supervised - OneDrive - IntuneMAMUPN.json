@@ -1,0 +1,49 @@
+{
+  "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceAppManagement/mobileAppConfigurations(assignments())/$entity",
+  "@odata.type": "#microsoft.graph.iosMobileAppConfiguration",
+  "@odata.id": "deviceAppManagement/mobileAppConfigurations('923f106a-be01-4912-bdbd-a1ba1cae9a1d')",
+  "@odata.editLink": "deviceAppManagement/mobileAppConfigurations('923f106a-be01-4912-bdbd-a1ba1cae9a1d')/microsoft.graph.iosMobileAppConfiguration",
+  "id": "923f106a-be01-4912-bdbd-a1ba1cae9a1d",
+  "targetedMobileApps@odata.type": "#Collection(String)",
+  "targetedMobileApps": [
+    "831ddccd-ac78-443f-ab49-6965dec18053"
+  ],
+  "roleScopeTagIds@odata.type": "#Collection(String)",
+  "roleScopeTagIds": [
+    "0"
+  ],
+  "createdDateTime@odata.type": "#DateTimeOffset",
+  "createdDateTime": "2025-01-24T11:34:02.7970142Z",
+  "description": "To differentiate between devices that are managed and unmanaged, a configuration key is required, this ensures that devices receive the correct app protection policy, as unmanaged devices may have stricter controls.\n\nThis policy sets the required configuration key for MDM managed devices, ensuring they receive the managed app protection policy.",
+  "lastModifiedDateTime@odata.type": "#DateTimeOffset",
+  "lastModifiedDateTime": "2025-01-26T20:51:19.4905526Z",
+  "displayName": "iOS - Supervised - OneDrive - IntuneMAMUPN",
+  "version": 2,
+  "encodedSettingXml": null,
+  "settings@odata.type": "#Collection(microsoft.graph.appConfigurationSettingItem)",
+  "settings": [
+    {
+      "@odata.type": "#microsoft.graph.appConfigurationSettingItem",
+      "appConfigKey": "IntuneMAMUPN",
+      "appConfigKeyType@odata.type": "#microsoft.graph.mdmAppConfigKeyType",
+      "appConfigKeyType": "stringType",
+      "appConfigKeyValue": "{{UserPrincipalName}}"
+    }
+  ],
+  "assignments@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceAppManagement/mobileAppConfigurations('923f106a-be01-4912-bdbd-a1ba1cae9a1d')/microsoft.graph.iosMobileAppConfiguration/assignments",
+  "assignments@odata.associationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('923f106a-be01-4912-bdbd-a1ba1cae9a1d')/microsoft.graph.iosMobileAppConfiguration/assignments/$ref",
+  "assignments@odata.navigationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('923f106a-be01-4912-bdbd-a1ba1cae9a1d')/microsoft.graph.iosMobileAppConfiguration/assignments",
+  "deviceStatuses@odata.associationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('923f106a-be01-4912-bdbd-a1ba1cae9a1d')/microsoft.graph.iosMobileAppConfiguration/deviceStatuses/$ref",
+  "deviceStatuses@odata.navigationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('923f106a-be01-4912-bdbd-a1ba1cae9a1d')/microsoft.graph.iosMobileAppConfiguration/deviceStatuses",
+  "deviceStatusSummary@odata.associationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('923f106a-be01-4912-bdbd-a1ba1cae9a1d')/microsoft.graph.iosMobileAppConfiguration/deviceStatusSummary/$ref",
+  "deviceStatusSummary@odata.navigationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('923f106a-be01-4912-bdbd-a1ba1cae9a1d')/microsoft.graph.iosMobileAppConfiguration/deviceStatusSummary",
+  "userStatuses@odata.associationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('923f106a-be01-4912-bdbd-a1ba1cae9a1d')/microsoft.graph.iosMobileAppConfiguration/userStatuses/$ref",
+  "userStatuses@odata.navigationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('923f106a-be01-4912-bdbd-a1ba1cae9a1d')/microsoft.graph.iosMobileAppConfiguration/userStatuses",
+  "userStatusSummary@odata.associationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('923f106a-be01-4912-bdbd-a1ba1cae9a1d')/microsoft.graph.iosMobileAppConfiguration/userStatusSummary/$ref",
+  "userStatusSummary@odata.navigationLink": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('923f106a-be01-4912-bdbd-a1ba1cae9a1d')/microsoft.graph.iosMobileAppConfiguration/userStatusSummary",
+  "#microsoft.graph.assign": {
+    "title": "microsoft.graph.assign",
+    "target": "https://graph.microsoft.com/beta/deviceAppManagement/mobileAppConfigurations('923f106a-be01-4912-bdbd-a1ba1cae9a1d')/microsoft.graph.managedDeviceMobileAppConfiguration/microsoft.graph.assign"
+  },
+  "#CustomRefTargetedApps": "Microsoft OneDrive|!|831ddccd-ac78-443f-ab49-6965dec18053|!|#microsoft.graph.iosVppApp"
+}

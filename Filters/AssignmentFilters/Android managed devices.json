@@ -1,0 +1,28 @@
+{
+  "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/assignmentFilters/$entity",
+  "@odata.type": "#microsoft.graph.deviceAndAppManagementAssignmentFilter",
+  "@odata.id": "deviceManagement/assignmentFilters('86b45bc3-329f-478b-b9aa-dd7f270d2624')",
+  "@odata.editLink": "deviceManagement/assignmentFilters('86b45bc3-329f-478b-b9aa-dd7f270d2624')",
+  "id": "86b45bc3-329f-478b-b9aa-dd7f270d2624",
+  "createdDateTime@odata.type": "#DateTimeOffset",
+  "createdDateTime": "2025-01-21T13:05:14.1997305Z",
+  "lastModifiedDateTime@odata.type": "#DateTimeOffset",
+  "lastModifiedDateTime": "2025-01-21T13:05:14.1997305Z",
+  "displayName": "Android managed devices",
+  "description": "",
+  "platform@odata.type": "#microsoft.graph.devicePlatformType",
+  "platform": "androidMobileApplicationManagement",
+  "rule": "(app.deviceManagementType -eq \"Android Enterprise\")",
+  "roleScopeTags@odata.type": "#Collection(String)",
+  "roleScopeTags": [
+    "0"
+  ],
+  "assignmentFilterManagementType@odata.type": "#microsoft.graph.assignmentFilterManagementType",
+  "assignmentFilterManagementType": "apps",
+  "payloads@odata.type": "#Collection(microsoft.graph.payloadByFilter)",
+  "payloads": [],
+  "#microsoft.graph.getSupportedProperties": {
+    "title": "microsoft.graph.getSupportedProperties",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/assignmentFilters('86b45bc3-329f-478b-b9aa-dd7f270d2624')/microsoft.graph.getSupportedProperties"
+  }
+}
