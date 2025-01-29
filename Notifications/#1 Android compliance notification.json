@@ -1,0 +1,39 @@
+{
+  "@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/notificationMessageTemplates(localizedNotificationMessages())/$entity",
+  "@odata.type": "#microsoft.graph.notificationMessageTemplate",
+  "@odata.id": "deviceManagement/notificationMessageTemplates('5ddbeb36-2996-4482-9d8a-efe91041e65f')",
+  "@odata.editLink": "deviceManagement/notificationMessageTemplates('5ddbeb36-2996-4482-9d8a-efe91041e65f')",
+  "id": "5ddbeb36-2996-4482-9d8a-efe91041e65f",
+  "lastModifiedDateTime@odata.type": "#DateTimeOffset",
+  "lastModifiedDateTime": "2025-01-26T13:32:37Z",
+  "displayName": "#1 Android compliance notification",
+  "description": null,
+  "defaultLocale": "en-gb",
+  "brandingOptions@odata.type": "#microsoft.graph.notificationTemplateBrandingOptions",
+  "brandingOptions": "includeCompanyLogo,includeCompanyName,includeContactInformation,includeCompanyPortalLink",
+  "roleScopeTagIds@odata.type": "#Collection(String)",
+  "roleScopeTagIds": [
+    "0"
+  ],
+  "localizedNotificationMessages@odata.context": "https://graph.microsoft.com/beta/$metadata#deviceManagement/notificationMessageTemplates('5ddbeb36-2996-4482-9d8a-efe91041e65f')/localizedNotificationMessages",
+  "localizedNotificationMessages@odata.associationLink": "https://graph.microsoft.com/beta/deviceManagement/notificationMessageTemplates('5ddbeb36-2996-4482-9d8a-efe91041e65f')/localizedNotificationMessages/$ref",
+  "localizedNotificationMessages@odata.navigationLink": "https://graph.microsoft.com/beta/deviceManagement/notificationMessageTemplates('5ddbeb36-2996-4482-9d8a-efe91041e65f')/localizedNotificationMessages",
+  "localizedNotificationMessages": [
+    {
+      "@odata.type": "#microsoft.graph.localizedNotificationMessage",
+      "@odata.id": "deviceManagement/notificationMessageTemplates('5ddbeb36-2996-4482-9d8a-efe91041e65f')/localizedNotificationMessages('5ddbeb36-2996-4482-9d8a-efe91041e65f_en-gb')",
+      "@odata.editLink": "deviceManagement/notificationMessageTemplates('5ddbeb36-2996-4482-9d8a-efe91041e65f')/localizedNotificationMessages('5ddbeb36-2996-4482-9d8a-efe91041e65f_en-gb')",
+      "id": "5ddbeb36-2996-4482-9d8a-efe91041e65f_en-gb",
+      "lastModifiedDateTime@odata.type": "#DateTimeOffset",
+      "lastModifiedDateTime": "2025-01-29T20:27:40.5195251Z",
+      "locale": "en-gb",
+      "subject": "Your Android device {{DeviceName}} is not compliant",
+      "messageTemplate": "Hello {{UserName}},\r\n\r\nYour Android device {{DeviceName}} is not compliant. To ensure you do not lose access to company resources, please use the Company Portal link provided to check your access requirements and resolve outstanding issues.\r\n\r\nIf in doubt, please contact support by forwarding this email to [enter support email here] with your query.\r\n\r\nKind Regards,\r\n[COMPANY NAME], IT Department",
+      "isDefault": true
+    }
+  ],
+  "#microsoft.graph.sendTestMessage": {
+    "title": "microsoft.graph.sendTestMessage",
+    "target": "https://graph.microsoft.com/beta/deviceManagement/notificationMessageTemplates('5ddbeb36-2996-4482-9d8a-efe91041e65f')/microsoft.graph.sendTestMessage"
+  }
+}
