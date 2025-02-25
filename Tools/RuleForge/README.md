@@ -259,6 +259,8 @@ Compares two captured rule sets (baseline and post-install) and outputs the diff
 "displayName","description","action","direction","protocol","localPortRanges","remotePortRanges","localAddressRanges","remoteAddressRanges","profileTypes","filePath","packageFamilyName"
 "Firefox (C:\Program Files\Mozilla Firefox)","","allow","inbound","6","","","","","Private","C:\Program Files\Mozilla Firefox\firefox.exe",""
 ```
+![image](https://github.com/user-attachments/assets/027ca689-c22e-497c-9cdc-e96662282177)
+
 
 #### Table
 - **Purpose**: Quick console display for `-Compare` mode.
