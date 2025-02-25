@@ -206,6 +206,28 @@ Compares two captured rule sets (baseline and post-install) and outputs the diff
 ```
 - Shows raw and formatted JSON snippets during comparison.
 
+#### The following steps will provide you with both a JSON for automation and a CSV for manual review - Update the parameters as required e.g., `-SkipDisabled` and `-ProfileType`
+
+#### Capture Baseline Rules for private profile as JSON, skip disabled rules
+```powershell
+.\RuleForge.ps1 -Capture -CaptureType Baseline -Output baseline.json -SkipDisabled -ProfileType 'Private'
+```
+
+#### Capture PostInstall Rules for private profile as JSON, skip disabled rules
+```powershell
+.\RuleForge.ps1 -Capture -CaptureType PostInstall -Output postinstall.json -SkipDisabled -ProfileType 'Private'
+```
+
+#### Compare and Output New Rules as JSON
+```powershell
+.\RuleForge.ps1 -Compare -BaselineFile baseline.json -PostInstallFile postinstall.json -OutputFormat JSON -OutputFile newrules.json
+```
+
+#### Compare and Output New Rules as CSV
+```powershell
+.\RuleForge.ps1 -Compare -BaselineFile baseline.json -PostInstallFile postinstall.json -OutputFormat CSV -OutputFile newrules.json
+```
+
 ### Output Formats
 
 #### JSON

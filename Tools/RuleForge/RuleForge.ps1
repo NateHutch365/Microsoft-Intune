@@ -71,16 +71,17 @@ function ConvertTo-IntuneFirewallRule {
         $remoteAddresses = @($addressFilter.RemoteAddress -split ',')
     }
 
+    # Return object with arrays intact for JSON, we'll flatten for CSV later
     [PSCustomObject]@{
         displayName = $rule.DisplayName
         description = $rule.Description
         action = $rule.Action.ToString().ToLower()
         direction = $rule.Direction.ToString().ToLower()
         protocol = $protocol
-        localPortRanges = $localPorts -join ','
-        remotePortRanges = $remotePorts -join ','
-        localAddressRanges = $localAddresses -join ','
-        remoteAddressRanges = $remoteAddresses -join ','
+        localPortRanges = $localPorts
+        remotePortRanges = $remotePorts
+        localAddressRanges = $localAddresses
+        remoteAddressRanges = $remoteAddresses
         profileTypes = $rule.Profile -split ',' -join ','
         filePath = $appFilter.Program
         packageFamilyName = $appFilter.Package
@@ -144,7 +145,22 @@ if ($Capture) {
             $jsonString | Set-Content -Path $Output
         } elseif ($OutputFormat -eq 'CSV') {
             $csvPath = [System.IO.Path]::ChangeExtension($Output, '.csv')
-            $rules | Export-Csv -Path $csvPath -NoTypeInformation
+            $rules | ForEach-Object {
+                [PSCustomObject]@{
+                    displayName = $_.displayName
+                    description = $_.description
+                    action = $_.action
+                    direction = $_.direction
+                    protocol = $_.protocol
+                    localPortRanges = $_.localPortRanges -join ','
+                    remotePortRanges = $_.remotePortRanges -join ','
+                    localAddressRanges = $_.localAddressRanges -join ','
+                    remoteAddressRanges = $_.remoteAddressRanges -join ','
+                    profileTypes = $_.profileTypes
+                    filePath = $_.filePath
+                    packageFamilyName = $_.packageFamilyName
+                }
+            } | Export-Csv -Path $csvPath -NoTypeInformation
             Write-Host "Rules saved as CSV to $csvPath"
         } else {
             Write-Error "Invalid OutputFormat for Capture mode. Use 'JSON' or 'CSV'."
@@ -182,7 +198,22 @@ if ($Capture) {
         } elseif ($OutputFormat -eq 'CSV') {
             Write-Host "Saving new rules to $OutputFile..."
             $csvPath = [System.IO.Path]::ChangeExtension($OutputFile, '.csv')
-            $newRules | Export-Csv -Path $csvPath -NoTypeInformation
+            $newRules | ForEach-Object {
+                [PSCustomObject]@{
+                    displayName = $_.displayName
+                    description = $_.description
+                    action = $_.action
+                    direction = $_.direction
+                    protocol = $_.protocol
+                    localPortRanges = $_.localPortRanges -join ','
+                    remotePortRanges = $_.remotePortRanges -join ','
+                    localAddressRanges = $_.localAddressRanges -join ','
+                    remoteAddressRanges = $_.remoteAddressRanges -join ','
+                    profileTypes = $_.profileTypes
+                    filePath = $_.filePath
+                    packageFamilyName = $_.packageFamilyName
+                }
+            } | Export-Csv -Path $csvPath -NoTypeInformation
             Write-Host "New rules saved as CSV to $csvPath"
         } elseif ($OutputFormat -eq 'Table') {
             Write-Host "Displaying new rules as table..."
