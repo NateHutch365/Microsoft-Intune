@@ -310,6 +310,14 @@ Firefox (C:\Program Files\Mozilla Firefox) allow inbound   6
 4. Run the script with desired parameters.
 
 
+### Running the Script
+Scripts downloaded from the internet may be blocked by PowerShell’s execution policy due to the "Mark of the Web." If you see an error like "RuleForge.ps1 is not digitally signed," unblock the file:
+- **GUI**: Right-click `RuleForge.ps1` > Properties > Check "Unblock" > Apply.
+- **PowerShell**: Run `Unblock-File -Path .\RuleForge.ps1`.
+Then execute the script with `.\RuleForge.ps1` (or `pwsh .\RuleForge.ps1` for PowerShell 7).
+- You may also need to update your PowerShell execution policy, I recommend using `Set-ExecutionPolicy RemoteSigned` for use of RuleForge.
+
+
 ## Contributing
 
 Feel free to fork this repository, submit pull requests, or report issues on GitHub. Feedback is welcome!
