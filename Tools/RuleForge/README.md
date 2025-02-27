@@ -90,8 +90,7 @@ Then fire up the forge:
 ### The Forge (Menu Mode)
 Run `.\RuleForge.ps1` without switches to ignite the interactive menu:
 
-#### [Insert image of menu here]
-
+![image](https://github.com/user-attachments/assets/cbd1cf16-4e1e-478e-b4e6-28f6498377f3)
 
 - **1. Capture Baseline Rules**: Forge a baseline from a clean system.
   - Prompts: Output filename, format (JSON/CSV), skip disabled/default rules, profile type.
@@ -174,6 +173,8 @@ For precision forging, use switches:
 - **Capture Post-Install**: `.\RuleForge.ps1 -Capture -CaptureType PostInstall -Output postinstall.json -SkipDisabled`
 - **Compare Rules**: `.\RuleForge.ps1 -Compare -BaselineFile baseline.json -PostInstallFile postinstall.json -OutputFile newrules`
 - **Compare and Output New Rules as CSV:** `.\RuleForge.ps1 -Compare -BaselineFile baseline.json -PostInstallFile postinstall.json -OutputFormat CSV -OutputFile newrules`
+
+![image](https://github.com/user-attachments/assets/949cd8e5-dd74-4312-92d2-78e36088d6e5)
 
 ## Notes
 - **JSON Format**: Empty arrays (`[]`) mean “Any” (no specific port/address).
