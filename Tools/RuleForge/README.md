@@ -59,7 +59,7 @@
 
 `RuleForge.ps1` is a PowerShell script designed to streamline the management of Windows Defender firewall rules for Microsoft Intune. It captures firewall rules from a reference machine, compares them to identify changes (e.g., new rules from app installations), and exports them in JSON or CSV format. This tool is ideal for endpoint security admins hardening devices via Intune, ensuring a single source of truth by disabling local policy merges and managing rules centrally.
 
-- **Version**: 1.0
+- **Version**: 1.1
 - **Author**: Nathan Hutchinson
 - **Website**: [natehutchinson.co.uk](https://natehutchinson.co.uk)
 - **GitHub**: [github.com/NateHutch365](https://github.com/NateHutch365)
@@ -128,6 +128,12 @@ Compares two captured rule sets (baseline and post-install) and outputs the diff
   - Description: Enables debug output, showing raw and formatted JSON snippets (first 200 characters) before saving. Useful for troubleshooting.
   - Default: False
   - Example: `-DebugOutput`
+ 
+- `-SkipDefaultRules`
+  - Type: Switch
+  - Description: Excludes default Windows firewall rules listed in `DefaultRules.json` during capture. Speeds up processing by skipping system rules.
+  - Example: `-SkipDefaultRules`
+  - Note: Requires a `DefaultRules.json` file. Generate it by running `-Capture -CaptureType Baseline -Output DefaultRules.json` on a fresh Windows install.
 
 #### Capture Mode Parameters
 - `-CaptureType`
@@ -287,6 +293,8 @@ Firefox (C:\Program Files\Mozilla Firefox) allow inbound   6
 * **Reference Machine:** Use an unmanaged device (no Intune/GPO) to allow apps to create rules freely.
 * **Performance:** For large rule sets (e.g., 500+ rules), expect a few minutes of processing time, shown in the final output (e.g., “Time taken: 0 minutes, 18.68 seconds. Rules captured: 38”).
 * **Future Plans:** Conversion to a PowerShell module with Microsoft Graph API integration for direct Intune imports is in progress.
+* **Generating DefaultRules.json**: To use `-SkipDefaultRules`, create a baseline of default rules on a fresh Windows install with no added apps. Run: `.\RuleForge.ps1 -Capture -CaptureType Baseline -Output DefaultRules.json`
+* Place `DefaultRules.json` in the same directory as `RuleForge.ps1`. A sample file for Windows 11 24H2 is available in the repo as `DefaultRules-Win11-24H2.json`. Rename it to `DefaultRules.json` to use.
 
 
 ## Installation
