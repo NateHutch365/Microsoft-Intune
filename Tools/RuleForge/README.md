@@ -181,10 +181,14 @@ For precision forging, use switches:
 - **Colors**: Requires a modern terminal (e.g., Windows Terminal) for ANSI colors to glow.
 
 ## Roadmap
-- v2.0: Forge into a PowerShell module.
-- Integrate Microsoft Graph API for Intune smelting.
-- Add test rule creation/deletion tools.
-- Enhance filtering and UI sparks.
+- **v2.0**: Forge into a PowerShell module.
+- **v2.x**: Integrate Microsoft Graph API for Intune smelting.
+- **v1.5**: Enhance menu with interactive app selection for production devices.
+- **v1.4**: Add `-ExtractAppRules` to filter app-specific rules from full captures.
+- **v1.3**: Introduce `-AppPath` to capture app-specific rules from live systems.
+- **v1.2**: Ignite menu system with colored text and default rule skipping.
+- **v1.1**: Hammer in `-SkipDefaultRules` with sample `DefaultRules-Win11-24H2.json`.
+- **v1.0**: Initial spark with core capture/compare/export.
 
 ## Contributing
 Fork it, hammer out pull requests, or spark issues on [GitHub](https://github.com/NateHutch365/Microsoft-Intune/tree/main/Tools/RuleForge).
