@@ -2,7 +2,7 @@
 
 All notable changes to RuleForge will be documented in this file.
 
-## [1.1] - 2025-03-XX
+## [1.1] - 27-02-2025
 ### Added
 - `-SkipDefaultRules` switch to exclude default Windows firewall rules listed in `DefaultRules.json` during capture. Speeds up processing by skipping system rules (e.g., 437 rules in Windows 11 24H2 OOBE reduced from 82s).
 - Sample `DefaultRules-Win11-24H2.json` file with 437 default rules from a fresh Windows 11 24H2 (Feb 2025 ISO) install.
@@ -11,7 +11,7 @@ All notable changes to RuleForge will be documented in this file.
 ### Changed
 - Updated script version from 1.0 to 1.1 in the `.VERSION` header.
 
-## [1.0] - 2025-02-27
+## [1.0] - 25-02-2025
 ### Initial Release
 - Core functionality to capture, compare, and export Windows Defender firewall rules for Intune integration.
 - Features:
