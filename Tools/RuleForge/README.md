@@ -57,271 +57,140 @@
 
 ## Overview
 
-`RuleForge.ps1` is a PowerShell script designed to streamline the management of Windows Defender firewall rules for Microsoft Intune. It captures firewall rules from a reference machine, compares them to identify changes (e.g., new rules from app installations), and exports them in JSON or CSV format. This tool is ideal for endpoint security admins hardening devices via Intune, ensuring a single source of truth by disabling local policy merges and managing rules centrally.
+A PowerShell script to forge Windows Defender firewall rules for Microsoft Intune integration.
 
-- **Version**: 1.1
-- **Author**: Nathan Hutchinson
-- **Website**: [natehutchinson.co.uk](https://natehutchinson.co.uk)
-- **GitHub**: [github.com/NateHutch365](https://github.com/NateHutch365)
+## Synopsis
+I wanted to know if I could build a useful tool using just AI as the developer, turns out, you can! 
 
-## Purpose
+RuleForge crafts Windows Defender firewall rules into a form ready for Intune deployment. Capture baseline rules from a clean system, snag post-install rules after adding apps, and compare them to hammer out the new ones—all with a blazing interactive menu or classic CLI switches. Output in JSON for Intune or CSV for review, and wield it on an unmanaged machine to let apps forge their rules freely.
 
-When hardening endpoints with Intune, local policy merge settings are often disabled to enforce Intune as the sole policy source. This prevents apps from automatically adding firewall rules locally, requiring admins to manage rules manually. `RuleForge.ps1` simplifies this by:
-1. Capturing a baseline of rules from an unmanaged reference machine.
-2. Capturing rules after installing apps.
-3. Comparing the two to identify new rules for Intune deployment.
+## Description
+Born to simplify firewall rule management for Intune, RuleForge has evolved into a blacksmith’s dream for Windows admins. Fire it up with `.\RuleForge.ps1` to enter the forge (menu mode), or swing the CLI hammer with switches for precision strikes. Version 1.2 brings a glowing menu system, colored text, and the power to skip default rules.
 
 ## Requirements
+- **PowerShell**: Version 7.0 or later (uses `??` operator and ANSI colors via `$PSStyle`).
+- **Permissions**: Run as Local Administrator to wield firewall rule access.
+- **Module**: Relies on `NetSecurity` (built into Windows PowerShell).
 
-- **Operating System**: Windows (tested on Windows 10/11).
-- **PowerShell**: Version 7.0 or later (uses features like the `??` operator not available in PowerShell 5.1).
-- **Permissions**: Must be run as a Local Administrator to access and retrieve firewall rules.
-- **Module**: Uses the `NetSecurity` module (included with Windows PowerShell).
-- **Environment**: Use on an unmanaged reference machine (no Intune/GPO) with a local admin account.
+## Installation
+1. Ensure PowerShell 7 is installed (`winget install --id Microsoft.PowerShell --source winget`; grab it from [Microsoft](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.5) if needed).
+2. Download `RuleForge.ps1` from [GitHub](https://github.com/NateHutch365/Microsoft-Intune/tree/main/Tools/RuleForge).
+3. (Optional) Drop `DefaultRules.json` in the same directory for `-SkipDefaultRules`. A sample `DefaultRules-Win11-24H2.json` is included for Windows 11 24H2.
+
+## Running the Script
+Scripts from the web carry the "Mark of the Web" and may be blocked by PowerShell’s execution policy. If you see “RuleForge.ps1 is not digitally signed,” unblock it:
+- **GUI**: Right-click `RuleForge.ps1` > Properties > Check "Unblock" > Apply.
+- **PowerShell**: `Unblock-File -Path .\RuleForge.ps1`.
+
+Then fire up the forge:
+- **Menu Mode**: `.\RuleForge.ps1` (no switches).
+- **CLI Mode**: `.\RuleForge.ps1 -Capture -CaptureType Baseline -Output baseline.json` (with switches).
 
 ## Usage
+### The Forge (Menu Mode)
+Run `.\RuleForge.ps1` without switches to ignite the interactive menu:
 
-Run the script in PowerShell with administrative privileges. It supports two modes: `-Capture` and `-Compare`.
+#### [Insert image of menu here]
 
-### Modes
 
-#### Capture Mode
-Captures all current firewall rules and saves them to a file.
+- **1. Capture Baseline Rules**: Forge a baseline from a clean system.
+  - Prompts: Output filename, format (JSON/CSV), skip disabled/default rules, profile type.
+  - Defaults: `baseline.json`, JSON, no skips, All profiles.
+- **2. Capture Post-Install Rules**: Hammer out rules after app installs.
+  - Same prompts, defaults to `postinstall.json`.
+- **3. Compare Rules**: Smelt new rules from baseline and post-install captures.
+  - Prompts: Baseline file, post-install file, output prefix, dual JSON/CSV export.
+  - Defaults: `baseline.json`, `postinstall.json`, `newrules`, dual output.
+- **4. Exit**: “Extinguishing the forge – RuleForge stopped. Happy blacksmithing!”
 
-```powershell
-.\RuleForge.ps1 -Capture -CaptureType <Type> -Output <FilePath> [Options]
-```
+Press Enter on prompts to accept defaults. Missing `DefaultRules.json`? The forge offers to craft one (best on a fresh OOBE system).
 
-#### Compare Mode
-Compares two captured rule sets (baseline and post-install) and outputs the differences.
-
-```powershell
-.\RuleForge.ps1 -Compare -BaselineFile <BaselinePath> -PostInstallFile <PostInstallPath> -OutputFile <OutputPath> [Options]
-```
-
-### Parameters
-
-#### Common Parameters
+### CLI Mode (Manual Switches)
+For precision forging, use switches:
+#### Parameters
 - `-Capture`
   - Type: Switch
-  - Description: Enables capture mode to export current firewall rules.
-  - Example: `-Capture`
+  - Description: Captures firewall rules from the local machine.
+  - Example: `-Capture -CaptureType Baseline -Output baseline.json`
+
+- `-CaptureType`
+  - Type: String
+  - Description: Specifies capture type: `Baseline` or `PostInstall`.
+  - Example: `-CaptureType Baseline`
+
+- `-Output`
+  - Type: String
+  - Description: Output file path for captured rules.
+  - Example: `-Output baseline.json`
 
 - `-Compare`
   - Type: Switch
-  - Description: Enables compare mode to find new rules between two captures.
-  - Example: `-Compare`
+  - Description: Compares two rule sets to identify new rules.
+  - Example: `-Compare -BaselineFile baseline.json -PostInstallFile postinstall.json`
+
+- `-BaselineFile`
+  - Type: String
+  - Description: Path to baseline rules file (JSON).
+  - Example: `-BaselineFile baseline.json`
+
+- `-PostInstallFile`
+  - Type: String
+  - Description: Path to post-install rules file (JSON).
+  - Example: `-PostInstallFile postinstall.json`
+
+- `-OutputFormat`
+  - Type: String
+  - Description: Output format: `JSON` (default), `CSV`, or `Table` (console only).
+  - Example: `-OutputFormat CSV`
+
+- `-OutputFile`
+  - Type: String
+  - Description: Output file prefix for comparison (e.g., `newrules` becomes `newrules.json`/`newrules.csv`).
+  - Example: `-OutputFile newrules`
 
 - `-SkipDisabled`
   - Type: Switch
-  - Description: Filters out disabled rules during capture, including only enabled rules.
-  - Default: False (includes all rules).
+  - Description: Excludes disabled rules from capture.
   - Example: `-SkipDisabled`
 
 - `-ProfileType`
   - Type: String
-  - Description: Filters rules by network profile type(s). Accepts `Private`, `Public`, `Domain`, `All`, or a comma-separated list (e.g., `Private,Public`).
-  - Default: `All`
-  - Example: `-ProfileType 'Private'` or `-ProfileType 'Private,Public'`
+  - Description: Filters by profile: `All` (default), `Private`, `Public`, `Domain`, or comma-separated (e.g., `Private,Public`).
+  - Example: `-ProfileType Private,Public`
 
 - `-DebugOutput`
   - Type: Switch
-  - Description: Enables debug output, showing raw and formatted JSON snippets (first 200 characters) before saving. Useful for troubleshooting.
-  - Default: False
+  - Description: Shows raw/formatted JSON snippets for debugging.
   - Example: `-DebugOutput`
- 
+
 - `-SkipDefaultRules`
   - Type: Switch
-  - Description: Excludes default Windows firewall rules listed in `DefaultRules.json` during capture. Speeds up processing by skipping system rules.
+  - Description: Skips default Windows rules listed in `DefaultRules.json`.
   - Example: `-SkipDefaultRules`
-  - Note: Requires a `DefaultRules.json` file. Generate it by running `-Capture -CaptureType Baseline -Output DefaultRules.json` on a fresh Windows install.
 
-#### Capture Mode Parameters
-- `-CaptureType`
-  - Type: String
-  - Description: Specifies the type of capture. Required for `-Capture`.
-  - Options:
-    - `Baseline`: Captures rules before app installation.
-    - `PostInstall`: Captures rules after app installation.
-  - Example: `-CaptureType 'Baseline'`
+#### Examples
+- **Capture Baseline**: `.\RuleForge.ps1 -Capture -CaptureType Baseline -Output baseline.json -SkipDefaultRules`
+- **Capture Baseline for private & public profile**: `.\RuleForge.ps1 -Capture -CaptureType Baseline -Output baseline.json -SkipDisabled -ProfileType 'Private,Public'`
+- **Capture Post-Install**: `.\RuleForge.ps1 -Capture -CaptureType PostInstall -Output postinstall.json -SkipDisabled`
+- **Compare Rules**: `.\RuleForge.ps1 -Compare -BaselineFile baseline.json -PostInstallFile postinstall.json -OutputFile newrules`
+- **Compare and Output New Rules as CSV:** `.\RuleForge.ps1 -Compare -BaselineFile baseline.json -PostInstallFile postinstall.json -OutputFormat CSV -OutputFile newrules`
 
-- `-Output`
-  - Type: String
-  - Description: Path to save the captured rules file. Extension changes based on `-OutputFormat` (`.json` or `.csv`).
-  - Required for `-Capture`.
-  - Example: `-Output 'C:\Scripts\baseline.json'`
+## Notes
+- **JSON Format**: Empty arrays (`[]`) mean “Any” (no specific port/address).
+- **DefaultRules.json**: For `-SkipDefaultRules`, craft it on a fresh OOBE system: `.\RuleForge.ps1 -Capture -CaptureType Baseline -Output DefaultRules.json` Place it with `RuleForge.ps1`. A Windows 11 24H2 sample is at `DefaultRules-Win11-24H2.json` (you'll want to rename this).
+- **Colors**: Requires a modern terminal (e.g., Windows Terminal) for ANSI colors to glow.
 
-- `-OutputFormat`
-  - Type: String
-  - Description: Format for the output file in `-Capture` mode.
-  - Options:
-    - `JSON`: Saves rules as JSON (Intune-compatible, arrays like `[]` mean "Any"). Default.
-    - `CSV`: Saves rules as a flat CSV file for manual review.
-  - Default: `JSON`
-  - Example: `-OutputFormat 'CSV'`
-
-#### Compare Mode Parameters
-- `-BaselineFile`
-  - Type: String
-  - Description: Path to the baseline JSON file (from a `Baseline` capture). Required for `-Compare`.
-  - Example: `-BaselineFile 'C:\Scripts\baseline.json'`
-
-- `-PostInstallFile`
-  - Type: String
-  - Description: Path to the post-install JSON file (from a `PostInstall` capture). Required for `-Compare`.
-  - Example: `-PostInstallFile 'C:\Scripts\postinstall.json'`
-
-- `-OutputFile`
-  - Type: String
-  - Description: Path to save the comparison result. Extension changes based on `-OutputFormat` (`.json` or `.csv`).
-  - Required for `-Compare` unless `-OutputFormat 'Table'`.
-  - Example: `-OutputFile 'C:\Scripts\newrules.csv'`
-
-- `-OutputFormat`
-  - Type: String
-  - Description: Format for the comparison output in `-Compare` mode.
-  - Options:
-    - `JSON`: Saves new rules as JSON (Intune-compatible). Default.
-    - `CSV`: Saves new rules as a CSV file.
-    - `Table`: Displays new rules in the PowerShell console as a table (no file output).
-  - Default: `JSON`
-  - Example: `-OutputFormat 'Table'`
-
-### Examples
-
-#### Capture Baseline Rules as JSON
-```powershell
-.\RuleForge.ps1 -Capture -CaptureType Baseline -Output C:\Scripts\baseline.json -SkipDisabled -ProfileType 'Private'
-```
-- Captures enabled rules for the Private profile, saves to `baseline.json`.
-
-#### Capture Post-Install Rules as CSV
-```powershell
-.\RuleForge.ps1 -Capture -CaptureType PostInstall -Output C:\Scripts\postinstall.json -OutputFormat CSV -SkipDisabled -ProfileType 'Private'
-```
-- After installing an app, captures rules to `postinstall.csv`.
-
-#### Compare and Output New Rules as CSV
-```powershell
-.\RuleForge.ps1 -Compare -BaselineFile C:\Scripts\baseline.json -PostInstallFile C:\Scripts\postinstall.json -OutputFormat CSV -OutputFile C:\Scripts\newrules.csv
-```
-- Compares the two JSON files, saves new rules to `newrules.csv`.
-
-#### Compare with Debug Output
-```powershell
-.\RuleForge.ps1 -Compare -BaselineFile C:\Scripts\baseline.json -PostInstallFile C:\Scripts\postinstall.json -OutputFile C:\Scripts\newrules.json -DebugOutput
-```
-- Shows raw and formatted JSON snippets during comparison.
-
-#### The following steps will provide you with both a JSON for automation and a CSV for manual review - Update the parameters as required e.g., `-SkipDisabled` and `-ProfileType`
-
-#### Capture Baseline Rules for private profile as JSON, skip disabled rules
-```powershell
-.\RuleForge.ps1 -Capture -CaptureType Baseline -Output baseline.json -SkipDisabled -ProfileType 'Private'
-```
-
-#### Capture PostInstall Rules for private profile as JSON, skip disabled rules
-```powershell
-.\RuleForge.ps1 -Capture -CaptureType PostInstall -Output postinstall.json -SkipDisabled -ProfileType 'Private'
-```
-
-#### Compare and Output New Rules as JSON
-```powershell
-.\RuleForge.ps1 -Compare -BaselineFile baseline.json -PostInstallFile postinstall.json -OutputFormat JSON -OutputFile newrules.json
-```
-
-#### Compare and Output New Rules as CSV
-```powershell
-.\RuleForge.ps1 -Compare -BaselineFile baseline.json -PostInstallFile postinstall.json -OutputFormat CSV -OutputFile newrules.json
-```
-
-### Output Formats
-
-#### JSON
-- **Purpose**: Compatible with Intune’s `windowsFirewallRule` schema via Microsoft Graph API.
-- **Note**: Empty arrays (`[]`) represent "Any" (no specific port/address restriction).
-- **Example**:
-```json
-{
-  "displayName": "Firefox (C:\\Program Files\\Mozilla Firefox)",
-  "description": null,
-  "action": "allow",
-  "direction": "inbound",
-  "protocol": 6,
-  "localPortRanges": [],
-  "remotePortRanges": [],
-  "localAddressRanges": [],
-  "remoteAddressRanges": [],
-  "profileTypes": "Private",
-  "filePath": "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
-  "packageFamilyName": null
-}
-```
-
-#### CSV
-- **Purpose**: Flat table format for manual review in Excel or text editors.
-- **Note**: Array fields (e.g., `localPortRanges`) are joined with commas (e.g., `8443`,`9999`).
-- **Example**:
-```csv
-"displayName","description","action","direction","protocol","localPortRanges","remotePortRanges","localAddressRanges","remoteAddressRanges","profileTypes","filePath","packageFamilyName"
-"Firefox (C:\Program Files\Mozilla Firefox)","","allow","inbound","6","","","","","Private","C:\Program Files\Mozilla Firefox\firefox.exe",""
-```
-![image](https://github.com/user-attachments/assets/027ca689-c22e-497c-9cdc-e96662282177)
-
-
-#### Table
-- **Purpose**: Quick console display for `-Compare` mode.
-- **Example**:
-```
-displayName                          action direction protocol localPortRanges remotePortRanges
------------                          ------ --------- -------- --------------- ----------------
-Firefox (C:\Program Files\Mozilla Firefox) allow inbound   6
-```
-
-### Workflow
-
-1. **Baseline Capture:**
-    * Run `-Capture -CaptureType Baseline` before installing apps to create a baseline (e.g., `baseline.json`).
-2. **Install Apps:**
-    * Install applications on the reference machine that create firewall rules.
-3. **Post-Install Capture:**
-    * Run `-Capture -CaptureType PostInstall` to capture rules after installation (e.g., `postinstall.json`).
-4. **Compare:**
-    * Run `-Compare` with the baseline and post-install JSON files to generate new rules (e.g., `newrules.csv`).
-5. **Review:**
-    * Use the CSV output for manual Intune policy creation or JSON for future automation.
-
-### Notes
-
-* **Reference Machine:** Use an unmanaged device (no Intune/GPO) to allow apps to create rules freely.
-* **Performance:** For large rule sets (e.g., 500+ rules), expect a few minutes of processing time, shown in the final output (e.g., “Time taken: 0 minutes, 18.68 seconds. Rules captured: 38”).
-* **Future Plans:** Conversion to a PowerShell module with Microsoft Graph API integration for direct Intune imports is in progress.
-* **Generating DefaultRules.json**: To use `-SkipDefaultRules`, create a baseline of default rules on a fresh Windows install with no added apps. Run: `.\RuleForge.ps1 -Capture -CaptureType Baseline -Output DefaultRules.json`
-* Place `DefaultRules.json` in the same directory as `RuleForge.ps1`. A sample file for Windows 11 24H2 is available in the repo as `DefaultRules-Win11-24H2.json`. Rename it to `DefaultRules.json` to use.
-
-
-## Installation
-
-1. Ensure PowerShell 7 is installed.
-2. Download `RuleForge.ps1` from this repository.
-3. (Optional) Place `DefaultRules.json` in the same directory for `-SkipDefaultRules` functionality.
-2. Open PowerShell as an Administrator.
-3. Navigate to the script directory (e.g., `cd C:\Scripts`).
-4. Run the script with desired parameters.
-
-
-### Running the Script
-Scripts downloaded from the internet may be blocked by PowerShell’s execution policy due to the "Mark of the Web." If you see an error like "RuleForge.ps1 is not digitally signed," unblock the file:
-- **GUI**: Right-click `RuleForge.ps1` > Properties > Check "Unblock" > Apply.
-- **PowerShell**: Run `Unblock-File -Path .\RuleForge.ps1`.
-Then execute the script with `.\RuleForge.ps1` (or `pwsh .\RuleForge.ps1` for PowerShell 7).
-- You may also need to update your PowerShell execution policy, I recommend using `Set-ExecutionPolicy RemoteSigned` for use of RuleForge.
-
+## Roadmap
+- v2.0: Forge into a PowerShell module.
+- Integrate Microsoft Graph API for Intune smelting.
+- Add test rule creation/deletion tools.
+- Enhance filtering and UI sparks.
 
 ## Contributing
-
-Feel free to fork this repository, submit pull requests, or report issues on GitHub. Feedback is welcome!
+Fork it, hammer out pull requests, or spark issues on [GitHub](https://github.com/NateHutch365/Microsoft-Intune/tree/main/Tools/RuleForge).
 
 ## License
-
 This project is open-source and free to use.
+
+## Acknowledgments
+Vision and roadmap by Nathan Hutchinson, forged by Grok3 at xAI.
