@@ -74,8 +74,9 @@ When hardening endpoints with Intune, local policy merge settings are often disa
 ## Requirements
 
 - **Operating System**: Windows (tested on Windows 10/11).
-- **PowerShell**: Version 5.1 or later (uses `NetSecurity` module cmdlets like `Get-NetFirewallRule`).
-- **Permissions**: Must be run as a Local Administrator to access firewall rules.
+- **PowerShell**: Version 7.0 or later (uses features like the `??` operator not available in PowerShell 5.1).
+- **Permissions**: Must be run as a Local Administrator to access and retrieve firewall rules.
+- **Module**: Uses the `NetSecurity` module (included with Windows PowerShell).
 - **Environment**: Use on an unmanaged reference machine (no Intune/GPO) with a local admin account.
 
 ## Usage
@@ -301,7 +302,9 @@ Firefox (C:\Program Files\Mozilla Firefox) allow inbound   6
 
 ## Installation
 
-1. Download `RuleForge.ps1` from this repository.
+1. Ensure PowerShell 7 is installed.
+2. Download `RuleForge.ps1` from this repository.
+3. (Optional) Place `DefaultRules.json` in the same directory for `-SkipDefaultRules` functionality.
 2. Open PowerShell as an Administrator.
 3. Navigate to the script directory (e.g., `cd C:\Scripts`).
 4. Run the script with desired parameters.
