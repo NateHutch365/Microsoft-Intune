@@ -2,7 +2,7 @@
 
 All notable changes to RuleForge are hammered out in this file.
 
-## [1.2.1] - 28-02-2025
+## [1.2.1] - 28-03-2025
 ### Changed
 - **Code Refactoring & Modularization**:  
   - Consolidated duplicate logic into helper functions (`New-DefaultRules`, `Get-FilteredFirewallRules`, and `Export-RuleSet`) to improve maintainability without altering external functionality.
