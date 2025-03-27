@@ -2,6 +2,17 @@
 
 All notable changes to RuleForge are hammered out in this file.
 
+## [1.2.1] - 28-02-2025
+### Changed
+- **Code Refactoring & Modularization**:  
+  - Consolidated duplicate logic into helper functions (`New-DefaultRules`, `Get-FilteredFirewallRules`, and `Export-RuleSet`) to improve maintainability without altering external functionality.
+- **Cmdlet Verb Correction**:  
+  - Renamed `Generate-DefaultRules` to `New-DefaultRules` in accordance with approved PowerShell verbs.
+  
+### Fixed
+- **Output File Naming**:  
+  - Corrected the naming issue so that baseline and post-install output files are now correctly named (e.g., "baseline.json" instead of "baseline.json.json").
+
 ## [1.2] - 27-02-2025
 ### Added
 - **Interactive Menu System**: Ignite `.\RuleForge.ps1` without switches for a blazing menu:
