@@ -7,7 +7,6 @@
         To remove multiple simple add the software in both $programs variables: @('Dell SupportAssist','Dell CommandUpdate','Dell Update')
     .NOTES
         Author:      Dirk Bester
-        Contact:     Dirk.Bester@yahoo.com
         Created:     2022-01-24
         Updated:     2022-01-25
         Version history:
