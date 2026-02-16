@@ -427,6 +427,7 @@ function Start-BackgroundOperation {
     $runspace.SessionStateProxy.SetVariable("params", $Parameters)
     $runspace.SessionStateProxy.SetVariable("scriptDir", $script:ScriptDir)
     $runspace.SessionStateProxy.SetVariable("logFilePath", $script:LogFile)
+    $runspace.SessionStateProxy.SetVariable("sharedFunctions", $script:SharedFunctions)
 
     $psCmd = [powershell]::Create()
     $psCmd.Runspace = $runspace
@@ -441,113 +442,122 @@ function Start-BackgroundOperation {
 }
 
 # ============================================================================
+# Region: Shared Functions for Background Runspaces
+# ============================================================================
+# Functions defined here are injected into each background runspace via
+# SessionStateProxy to avoid code duplication across scriptblocks.
+$script:SharedFunctions = @'
+function Add-Log {
+    param([string]$Message, [string]$Level = "INFO")
+    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss.fff"
+    $entry = "[$timestamp] [$Level] $Message"
+    $syncHash.LogQueue.Add($entry) | Out-Null
+    try {
+        Add-Content -Path $logFilePath -Value $entry -ErrorAction SilentlyContinue
+    } catch { }
+}
+
+function ConvertTo-IntuneFirewallRule {
+    param($rule)
+    Add-Log "Converting rule: $($rule.DisplayName)" "DEBUG"
+    $portFilter = $rule | Get-NetFirewallPortFilter
+    $addressFilter = $rule | Get-NetFirewallAddressFilter
+    $appFilter = $rule | Get-NetFirewallApplicationFilter
+
+    $protocolMap = @{ 'TCP' = 6; 'UDP' = 17 }
+    $protocol = if ($portFilter.Protocol -match '^\d+$') {
+        [int]$portFilter.Protocol
+    } else {
+        $mapped = $protocolMap[$portFilter.Protocol]
+        if ($null -ne $mapped) { $mapped } else { 0 }
+    }
+
+    $localPorts = @()
+    if ($null -ne $portFilter.LocalPort -and $portFilter.LocalPort -ne 'Any') {
+        $localPorts = @($portFilter.LocalPort -split ',')
+    }
+    $remotePorts = @()
+    if ($null -ne $portFilter.RemotePort -and $portFilter.RemotePort -ne 'Any') {
+        $remotePorts = @($portFilter.RemotePort -split ',')
+    }
+    $localAddresses = @()
+    if ($null -ne $addressFilter.LocalAddress -and $addressFilter.LocalAddress -ne 'Any') {
+        $localAddresses = @($addressFilter.LocalAddress -split ',')
+    }
+    $remoteAddresses = @()
+    if ($null -ne $addressFilter.RemoteAddress -and $addressFilter.RemoteAddress -ne 'Any') {
+        $remoteAddresses = @($addressFilter.RemoteAddress -split ',')
+    }
+
+    [PSCustomObject]@{
+        displayName        = $rule.DisplayName
+        description        = $rule.Description
+        action             = $rule.Action.ToString().ToLower()
+        direction          = $rule.Direction.ToString().ToLower()
+        protocol           = $protocol
+        localPortRanges    = $localPorts
+        remotePortRanges   = $remotePorts
+        localAddressRanges = $localAddresses
+        remoteAddressRanges = $remoteAddresses
+        profileTypes       = $rule.Profile -split ',' -join ','
+        filePath           = $appFilter.Program
+        packageFamilyName  = $appFilter.Package
+    }
+}
+
+function Export-RuleSetToFile {
+    param(
+        [Parameter(Mandatory=$true)] $rules,
+        [Parameter(Mandatory=$true)] [string]$OutputFile,
+        [Parameter(Mandatory=$true)] [string]$OutputFormat,
+        [bool]$DualOutput = $false
+    )
+
+    if ($DualOutput -or $OutputFormat -eq 'JSON') {
+        if ([System.IO.Path]::GetExtension($OutputFile).ToLower() -eq ".json") {
+            $jsonFile = $OutputFile
+        } else {
+            $jsonFile = "$OutputFile.json"
+        }
+        Add-Log "Saving rules to $jsonFile..."
+        $jsonString = $rules | ConvertTo-Json -Depth 5
+        $jsonString = $jsonString -replace '\[\s*"\s*([^"]+?)\s*"\s*\]', '["$1"]'
+        $jsonString | Set-Content -Path $jsonFile
+        Add-Log "Rules saved to $jsonFile"
+    }
+    if ($DualOutput -or $OutputFormat -eq 'CSV') {
+        if ([System.IO.Path]::GetExtension($OutputFile).ToLower() -eq ".csv") {
+            $csvFile = $OutputFile
+        } else {
+            $csvFile = "$OutputFile.csv"
+        }
+        Add-Log "Saving rules to $csvFile..."
+        $rules | Select-Object `
+            @{Name='displayName';Expression={$_.displayName}},
+            @{Name='description';Expression={$_.description}},
+            @{Name='action';Expression={$_.action}},
+            @{Name='direction';Expression={$_.direction}},
+            @{Name='protocol';Expression={$_.protocol}},
+            @{Name='localPortRanges';Expression={$_.localPortRanges -join ','}},
+            @{Name='remotePortRanges';Expression={$_.remotePortRanges -join ','}},
+            @{Name='localAddressRanges';Expression={$_.localAddressRanges -join ','}},
+            @{Name='remoteAddressRanges';Expression={$_.remoteAddressRanges -join ','}},
+            @{Name='profileTypes';Expression={$_.profileTypes}},
+            @{Name='filePath';Expression={$_.filePath}},
+            @{Name='packageFamilyName';Expression={$_.packageFamilyName}} |
+            Export-Csv -Path $csvFile -NoTypeInformation
+        Add-Log "Rules saved as CSV to $csvFile"
+    }
+}
+'@
+
+# ============================================================================
 # Region: Core Operation Script Blocks
 # ============================================================================
 
 # Script block for capture operations (runs in background runspace)
 $script:CaptureScriptBlock = {
-    function Add-Log {
-        param([string]$Message, [string]$Level = "INFO")
-        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss.fff"
-        $entry = "[$timestamp] [$Level] $Message"
-        $syncHash.LogQueue.Add($entry) | Out-Null
-        try {
-            Add-Content -Path $logFilePath -Value $entry -ErrorAction SilentlyContinue
-        } catch { }
-    }
-
-    function ConvertTo-IntuneFirewallRule {
-        param($rule)
-        Add-Log "Converting rule: $($rule.DisplayName)" "DEBUG"
-        $portFilter = $rule | Get-NetFirewallPortFilter
-        $addressFilter = $rule | Get-NetFirewallAddressFilter
-        $appFilter = $rule | Get-NetFirewallApplicationFilter
-
-        $protocolMap = @{ 'TCP' = 6; 'UDP' = 17 }
-        $protocol = if ($portFilter.Protocol -match '^\d+$') {
-            [int]$portFilter.Protocol
-        } else {
-            $mapped = $protocolMap[$portFilter.Protocol]
-            if ($null -ne $mapped) { $mapped } else { 0 }
-        }
-
-        $localPorts = @()
-        if ($null -ne $portFilter.LocalPort -and $portFilter.LocalPort -ne 'Any') {
-            $localPorts = @($portFilter.LocalPort -split ',')
-        }
-        $remotePorts = @()
-        if ($null -ne $portFilter.RemotePort -and $portFilter.RemotePort -ne 'Any') {
-            $remotePorts = @($portFilter.RemotePort -split ',')
-        }
-        $localAddresses = @()
-        if ($null -ne $addressFilter.LocalAddress -and $addressFilter.LocalAddress -ne 'Any') {
-            $localAddresses = @($addressFilter.LocalAddress -split ',')
-        }
-        $remoteAddresses = @()
-        if ($null -ne $addressFilter.RemoteAddress -and $addressFilter.RemoteAddress -ne 'Any') {
-            $remoteAddresses = @($addressFilter.RemoteAddress -split ',')
-        }
-
-        [PSCustomObject]@{
-            displayName        = $rule.DisplayName
-            description        = $rule.Description
-            action             = $rule.Action.ToString().ToLower()
-            direction          = $rule.Direction.ToString().ToLower()
-            protocol           = $protocol
-            localPortRanges    = $localPorts
-            remotePortRanges   = $remotePorts
-            localAddressRanges = $localAddresses
-            remoteAddressRanges = $remoteAddresses
-            profileTypes       = $rule.Profile -split ',' -join ','
-            filePath           = $appFilter.Program
-            packageFamilyName  = $appFilter.Package
-        }
-    }
-
-    function Export-RuleSetToFile {
-        param(
-            [Parameter(Mandatory=$true)] $rules,
-            [Parameter(Mandatory=$true)] [string]$OutputFile,
-            [Parameter(Mandatory=$true)] [string]$OutputFormat,
-            [bool]$DualOutput = $false
-        )
-
-        if ($DualOutput -or $OutputFormat -eq 'JSON') {
-            if ([System.IO.Path]::GetExtension($OutputFile).ToLower() -eq ".json") {
-                $jsonFile = $OutputFile
-            } else {
-                $jsonFile = "$OutputFile.json"
-            }
-            Add-Log "Saving rules to $jsonFile..."
-            $jsonString = $rules | ConvertTo-Json -Depth 5
-            $jsonString = $jsonString -replace '\[\s*"\s*([^"]+?)\s*"\s*\]', '["$1"]'
-            $jsonString | Set-Content -Path $jsonFile
-            Add-Log "Rules saved to $jsonFile"
-        }
-        if ($DualOutput -or $OutputFormat -eq 'CSV') {
-            if ([System.IO.Path]::GetExtension($OutputFile).ToLower() -eq ".csv") {
-                $csvFile = $OutputFile
-            } else {
-                $csvFile = "$OutputFile.csv"
-            }
-            Add-Log "Saving rules to $csvFile..."
-            $rules | Select-Object `
-                @{Name='displayName';Expression={$_.displayName}},
-                @{Name='description';Expression={$_.description}},
-                @{Name='action';Expression={$_.action}},
-                @{Name='direction';Expression={$_.direction}},
-                @{Name='protocol';Expression={$_.protocol}},
-                @{Name='localPortRanges';Expression={$_.localPortRanges -join ','}},
-                @{Name='remotePortRanges';Expression={$_.remotePortRanges -join ','}},
-                @{Name='localAddressRanges';Expression={$_.localAddressRanges -join ','}},
-                @{Name='remoteAddressRanges';Expression={$_.remoteAddressRanges -join ','}},
-                @{Name='profileTypes';Expression={$_.profileTypes}},
-                @{Name='filePath';Expression={$_.filePath}},
-                @{Name='packageFamilyName';Expression={$_.packageFamilyName}} |
-                Export-Csv -Path $csvFile -NoTypeInformation
-            Add-Log "Rules saved as CSV to $csvFile"
-        }
-    }
+    . ([scriptblock]::Create($sharedFunctions))
 
     try {
         Import-Module NetSecurity -ErrorAction Stop
@@ -634,62 +644,7 @@ $script:CaptureScriptBlock = {
 
 # Script block for generating DefaultRules.json (runs in background runspace)
 $script:GenerateDefaultScriptBlock = {
-    function Add-Log {
-        param([string]$Message, [string]$Level = "INFO")
-        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss.fff"
-        $entry = "[$timestamp] [$Level] $Message"
-        $syncHash.LogQueue.Add($entry) | Out-Null
-        try {
-            Add-Content -Path $logFilePath -Value $entry -ErrorAction SilentlyContinue
-        } catch { }
-    }
-
-    function ConvertTo-IntuneFirewallRule {
-        param($rule)
-        $portFilter = $rule | Get-NetFirewallPortFilter
-        $addressFilter = $rule | Get-NetFirewallAddressFilter
-        $appFilter = $rule | Get-NetFirewallApplicationFilter
-
-        $protocolMap = @{ 'TCP' = 6; 'UDP' = 17 }
-        $protocol = if ($portFilter.Protocol -match '^\d+$') {
-            [int]$portFilter.Protocol
-        } else {
-            $mapped = $protocolMap[$portFilter.Protocol]
-            if ($null -ne $mapped) { $mapped } else { 0 }
-        }
-
-        $localPorts = @()
-        if ($null -ne $portFilter.LocalPort -and $portFilter.LocalPort -ne 'Any') {
-            $localPorts = @($portFilter.LocalPort -split ',')
-        }
-        $remotePorts = @()
-        if ($null -ne $portFilter.RemotePort -and $portFilter.RemotePort -ne 'Any') {
-            $remotePorts = @($portFilter.RemotePort -split ',')
-        }
-        $localAddresses = @()
-        if ($null -ne $addressFilter.LocalAddress -and $addressFilter.LocalAddress -ne 'Any') {
-            $localAddresses = @($addressFilter.LocalAddress -split ',')
-        }
-        $remoteAddresses = @()
-        if ($null -ne $addressFilter.RemoteAddress -and $addressFilter.RemoteAddress -ne 'Any') {
-            $remoteAddresses = @($addressFilter.RemoteAddress -split ',')
-        }
-
-        [PSCustomObject]@{
-            displayName        = $rule.DisplayName
-            description        = $rule.Description
-            action             = $rule.Action.ToString().ToLower()
-            direction          = $rule.Direction.ToString().ToLower()
-            protocol           = $protocol
-            localPortRanges    = $localPorts
-            remotePortRanges   = $remotePorts
-            localAddressRanges = $localAddresses
-            remoteAddressRanges = $remoteAddresses
-            profileTypes       = $rule.Profile -split ',' -join ','
-            filePath           = $appFilter.Program
-            packageFamilyName  = $appFilter.Package
-        }
-    }
+    . ([scriptblock]::Create($sharedFunctions))
 
     try {
         Import-Module NetSecurity -ErrorAction Stop
@@ -739,60 +694,7 @@ $script:GenerateDefaultScriptBlock = {
 
 # Script block for compare operations (runs in background runspace)
 $script:CompareScriptBlock = {
-    function Add-Log {
-        param([string]$Message, [string]$Level = "INFO")
-        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss.fff"
-        $entry = "[$timestamp] [$Level] $Message"
-        $syncHash.LogQueue.Add($entry) | Out-Null
-        try {
-            Add-Content -Path $logFilePath -Value $entry -ErrorAction SilentlyContinue
-        } catch { }
-    }
-
-    function Export-RuleSetToFile {
-        param(
-            [Parameter(Mandatory=$true)] $rules,
-            [Parameter(Mandatory=$true)] [string]$OutputFile,
-            [Parameter(Mandatory=$true)] [string]$OutputFormat,
-            [bool]$DualOutput = $false
-        )
-
-        if ($DualOutput -or $OutputFormat -eq 'JSON') {
-            if ([System.IO.Path]::GetExtension($OutputFile).ToLower() -eq ".json") {
-                $jsonFile = $OutputFile
-            } else {
-                $jsonFile = "$OutputFile.json"
-            }
-            Add-Log "Saving rules to $jsonFile..."
-            $jsonString = $rules | ConvertTo-Json -Depth 5
-            $jsonString = $jsonString -replace '\[\s*"\s*([^"]+?)\s*"\s*\]', '["$1"]'
-            $jsonString | Set-Content -Path $jsonFile
-            Add-Log "Rules saved to $jsonFile"
-        }
-        if ($DualOutput -or $OutputFormat -eq 'CSV') {
-            if ([System.IO.Path]::GetExtension($OutputFile).ToLower() -eq ".csv") {
-                $csvFile = $OutputFile
-            } else {
-                $csvFile = "$OutputFile.csv"
-            }
-            Add-Log "Saving rules to $csvFile..."
-            $rules | Select-Object `
-                @{Name='displayName';Expression={$_.displayName}},
-                @{Name='description';Expression={$_.description}},
-                @{Name='action';Expression={$_.action}},
-                @{Name='direction';Expression={$_.direction}},
-                @{Name='protocol';Expression={$_.protocol}},
-                @{Name='localPortRanges';Expression={$_.localPortRanges -join ','}},
-                @{Name='remotePortRanges';Expression={$_.remotePortRanges -join ','}},
-                @{Name='localAddressRanges';Expression={$_.localAddressRanges -join ','}},
-                @{Name='remoteAddressRanges';Expression={$_.remoteAddressRanges -join ','}},
-                @{Name='profileTypes';Expression={$_.profileTypes}},
-                @{Name='filePath';Expression={$_.filePath}},
-                @{Name='packageFamilyName';Expression={$_.packageFamilyName}} |
-                Export-Csv -Path $csvFile -NoTypeInformation
-            Add-Log "Rules saved as CSV to $csvFile"
-        }
-    }
+    . ([scriptblock]::Create($sharedFunctions))
 
     try {
         $baselineFile = $params.BaselineFile
