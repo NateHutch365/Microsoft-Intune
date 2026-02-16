@@ -419,12 +419,15 @@ function Get-FilteredFirewallRules {
         [string]$StatusCallback
     )
     
+    Show-StatusMessage "DEBUG: Get-FilteredFirewallRules called with SkipDisabled=$SkipDisabled, SkipDefaultRules=$SkipDefaultRules" $StatusCallback
     Show-StatusMessage "Fetching firewall rules..." $StatusCallback
     $allRules = Get-NetFirewallRule
+    Show-StatusMessage "DEBUG: Retrieved $($allRules.Count) total rules" $StatusCallback
 
     if ($SkipDisabled) {
         Show-StatusMessage "Skipping disabled rules..." $StatusCallback
         $allRules = $allRules | Where-Object { $_.Enabled -eq 'True' }
+        Show-StatusMessage "DEBUG: After skipping disabled: $($allRules.Count) rules remain" $StatusCallback
     }
 
     if ($SkipDefaultRules) {
@@ -551,6 +554,15 @@ function Show-StatusMessage {
             }
         })
     }
+    
+    # Also write to debug log file
+    try {
+        $logPath = Join-Path $PWD "RuleForge-GUI-Debug.log"
+        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss.fff"
+        "$timestamp - $Message" | Add-Content -Path $logPath -ErrorAction SilentlyContinue
+    } catch {
+        # Silently ignore logging errors
+    }
 }
 
 function Update-ProgressBar {
@@ -610,8 +622,9 @@ function Invoke-CaptureOperation {
     $captureType = if ($window.FindName("RadioBaseline").IsChecked) { "Baseline" } else { "PostInstall" }
     $outputFile = $window.FindName("TxtCaptureOutput").Text
     $formatItem = $window.FindName("CmbCaptureFormat").SelectedItem.Content
-    $skipDisabled = $window.FindName("ChkSkipDisabled").IsChecked
-    $skipDefault = $window.FindName("ChkSkipDefaultRules").IsChecked
+    # Convert nullable bool to actual bool for switch parameters
+    $skipDisabled = [bool]($window.FindName("ChkSkipDisabled").IsChecked -eq $true)
+    $skipDefault = [bool]($window.FindName("ChkSkipDefaultRules").IsChecked -eq $true)
     $profileType = $window.FindName("CmbProfileType").SelectedItem.Content
     
     $logBox = $window.FindName("TxtCaptureLog")
@@ -689,6 +702,7 @@ function Invoke-CaptureOperation {
         try {
             $startTime = Get-Date
             Show-StatusMessage "Starting $captureType capture..." "TxtCaptureLog"
+            Show-StatusMessage "DEBUG: skipDisabled=$skipDisabled, skipDefault=$skipDefault, profileType=$profileType" "TxtCaptureLog"
             
             # Get filtered rules
             $allRules = Get-FilteredFirewallRules -SkipDisabled:$skipDisabled `

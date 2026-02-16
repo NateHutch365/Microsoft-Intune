@@ -250,6 +250,19 @@ Clicking "Yes" will generate the file automatically. This process may take sever
 - **Visual Feedback**: Progress bars and status messages keep you informed
 - **Error Handling**: User-friendly error messages in popup dialogs
 - **Responsive UI**: Operations run in background, preventing interface freezing
+- **Debug Logging**: Automatic debug log created at `RuleForge-GUI-Debug.log` for troubleshooting
+
+### Troubleshooting
+
+If you encounter issues with the GUI:
+
+1. **Check the debug log**: A file named `RuleForge-GUI-Debug.log` is automatically created in the same directory where you run the script. This log contains detailed information about all operations, including parameter values and error messages.
+
+2. **Admin privileges**: Ensure you're running PowerShell as Administrator. The GUI checks for this on startup but some operations require elevated permissions.
+
+3. **PowerShell version**: Verify you're using PowerShell 7.0 or later by running `$PSVersionTable.PSVersion`
+
+4. **Module availability**: The NetSecurity module should be available on Windows by default. If you get module-related errors, try running `Import-Module NetSecurity` manually first.
 
 ### Compiling to Standalone Executable
 
