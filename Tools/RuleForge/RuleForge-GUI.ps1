@@ -570,10 +570,10 @@ function Show-StatusMessage {
         # Silently ignore logging errors
     }
     
-    # Then try to update GUI (use BeginInvoke to avoid blocking)
+    # Then update GUI - use Invoke with Background priority to avoid blocking high-priority UI operations
     if ($LogControl) {
         try {
-            $window.Dispatcher.BeginInvoke([action]{
+            $window.Dispatcher.Invoke([System.Windows.Threading.DispatcherPriority]::Background, [action]{
                 try {
                     $logBox = $window.FindName($LogControl)
                     if ($logBox) {
@@ -584,7 +584,7 @@ function Show-StatusMessage {
                 } catch {
                     # Ignore GUI update errors
                 }
-            }) | Out-Null
+            })
         } catch {
             # If GUI update fails, at least we have the file log
         }
@@ -600,9 +600,9 @@ function Update-ProgressBar {
     
     $progressName = if ($LogControl -eq "TxtCaptureLog") { "ProgressCapture" } else { "ProgressCompare" }
     
-    # Use BeginInvoke to avoid blocking the background thread
+    # Use Invoke with Background priority to ensure updates happen without blocking
     try {
-        $window.Dispatcher.BeginInvoke([action]{
+        $window.Dispatcher.Invoke([System.Windows.Threading.DispatcherPriority]::Background, [action]{
             try {
                 $progressBar = $window.FindName($progressName)
                 if ($progressBar) {
@@ -616,7 +616,7 @@ function Update-ProgressBar {
             } catch {
                 # Ignore progress bar update errors
             }
-        }) | Out-Null
+        })
     } catch {
         # Continue even if progress bar update fails
     }
@@ -777,7 +777,13 @@ function Invoke-CaptureOperation {
                 if ($count % 50 -eq 0 -or $count -eq 1) {
                     Show-StatusMessage "DEBUG: Converting rule $count of $total ($([math]::Round($percent, 1))%)" "TxtCaptureLog"
                 }
-                Update-ProgressBar $percent "Converting rules: $count of $total" "TxtCaptureLog"
+                # Update progress bar without status text (to avoid overwhelming GUI with messages)
+                # Only show status every 10 rules to keep GUI responsive
+                if ($count % 10 -eq 0 -or $count -eq 1 -or $count -eq $total) {
+                    Update-ProgressBar $percent "Converting rules: $count of $total" "TxtCaptureLog"
+                } else {
+                    Update-ProgressBar $percent "" "TxtCaptureLog"
+                }
                 $rules += ConvertTo-IntuneFirewallRule $rule
             }
             Show-StatusMessage "DEBUG: Rule conversion completed - $($rules.Count) rules converted" "TxtCaptureLog"
