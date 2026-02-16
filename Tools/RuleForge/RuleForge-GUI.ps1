@@ -423,6 +423,7 @@ function Get-FilteredFirewallRules {
     Show-StatusMessage "Fetching firewall rules..." $StatusCallback
     $allRules = Get-NetFirewallRule
     Show-StatusMessage "DEBUG: Retrieved $($allRules.Count) total rules" $StatusCallback
+    Show-StatusMessage "DEBUG: About to check if SkipDisabled=$SkipDisabled" $StatusCallback
 
     if ($SkipDisabled) {
         Show-StatusMessage "Skipping disabled rules..." $StatusCallback
@@ -431,7 +432,11 @@ function Get-FilteredFirewallRules {
         $allRules = $allRules | Where-Object { $_.Enabled -eq 'True' }
         Show-StatusMessage "DEBUG: Where-Object filter completed" $StatusCallback
         Show-StatusMessage "DEBUG: After skipping disabled: $($allRules.Count) rules remain (removed $($beforeCount - $allRules.Count))" $StatusCallback
+    } else {
+        Show-StatusMessage "DEBUG: Skipping SkipDisabled block (switch is False)" $StatusCallback
     }
+    
+    Show-StatusMessage "DEBUG: About to check if SkipDefaultRules=$SkipDefaultRules" $StatusCallback
 
     if ($SkipDefaultRules) {
         Show-StatusMessage "Loading default rules to skip from DefaultRules.json..." $StatusCallback
@@ -448,7 +453,11 @@ function Get-FilteredFirewallRules {
             Show-StatusMessage "ERROR: Failed to load DefaultRules.json: $_" $StatusCallback
             return @()
         }
+    } else {
+        Show-StatusMessage "DEBUG: Skipping SkipDefaultRules block (switch is False)" $StatusCallback
     }
+    
+    Show-StatusMessage "DEBUG: About to process profile filtering, ProfileType=$ProfileType" $StatusCallback
 
     $validProfiles = 'Private', 'Public', 'Domain', 'All'
     $selectedProfiles = $ProfileType -split ',' | ForEach-Object { $_.Trim() }
@@ -552,24 +561,33 @@ function Show-StatusMessage {
         [string]$LogControl
     )
     
-    if ($LogControl) {
-        $window.Dispatcher.Invoke([action]{
-            $logBox = $window.FindName($LogControl)
-            if ($logBox) {
-                $timestamp = Get-Date -Format "HH:mm:ss"
-                $logBox.AppendText("[$timestamp] $Message`r`n")
-                $logBox.ScrollToEnd()
-            }
-        })
-    }
-    
-    # Also write to debug log file
+    # First, always write to debug log file (this is fast and reliable)
     try {
         $logPath = Join-Path $PWD "RuleForge-GUI-Debug.log"
         $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss.fff"
         "$timestamp - $Message" | Add-Content -Path $logPath -ErrorAction SilentlyContinue
     } catch {
         # Silently ignore logging errors
+    }
+    
+    # Then try to update GUI (use BeginInvoke to avoid blocking)
+    if ($LogControl) {
+        try {
+            $window.Dispatcher.BeginInvoke([action]{
+                try {
+                    $logBox = $window.FindName($LogControl)
+                    if ($logBox) {
+                        $timestamp = Get-Date -Format "HH:mm:ss"
+                        $logBox.AppendText("[$timestamp] $Message`r`n")
+                        $logBox.ScrollToEnd()
+                    }
+                } catch {
+                    # Ignore GUI update errors
+                }
+            }) | Out-Null
+        } catch {
+            # If GUI update fails, at least we have the file log
+        }
     }
 }
 
@@ -582,17 +600,26 @@ function Update-ProgressBar {
     
     $progressName = if ($LogControl -eq "TxtCaptureLog") { "ProgressCapture" } else { "ProgressCompare" }
     
-    $window.Dispatcher.Invoke([action]{
-        $progressBar = $window.FindName($progressName)
-        if ($progressBar) {
-            if ($Percent -ge 0 -and $Percent -le 100) {
-                $progressBar.Visibility = "Visible"
-                $progressBar.Value = $Percent
-            } else {
-                $progressBar.Visibility = "Collapsed"
+    # Use BeginInvoke to avoid blocking the background thread
+    try {
+        $window.Dispatcher.BeginInvoke([action]{
+            try {
+                $progressBar = $window.FindName($progressName)
+                if ($progressBar) {
+                    if ($Percent -ge 0 -and $Percent -le 100) {
+                        $progressBar.Visibility = "Visible"
+                        $progressBar.Value = $Percent
+                    } else {
+                        $progressBar.Visibility = "Collapsed"
+                    }
+                }
+            } catch {
+                # Ignore progress bar update errors
             }
-        }
-    })
+        }) | Out-Null
+    } catch {
+        # Continue even if progress bar update fails
+    }
     
     if ($Status) {
         Show-StatusMessage $Status $LogControl
