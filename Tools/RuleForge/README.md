@@ -200,3 +200,35 @@ This project is open-source and free to use.
 
 ## Acknowledgments
 Vision and roadmap by Nathan Hutchinson, forged by Grok3 at xAI.
+
+---
+
+## GUI Application (v2.0)
+
+RuleForge v2.0 introduces a WPF-based graphical user interface that provides:
+
+### Features
+- **Visual Workflow**: Intuitive tabbed interface for Capture, Compare, and Settings operations
+- **Progress Tracking**: Real-time progress bar showing capture/compare status
+- **Debug Logging**: Integrated log viewer with auto-save to file for troubleshooting
+- **File Browsers**: Easy file selection for input/output files
+- **DefaultRules Management**: Built-in generation and status checking for DefaultRules.json
+
+### Running the GUI
+1. Launch `RuleForgeGUI.exe` as Administrator
+2. Select the desired operation tab (Capture or Compare)
+3. Configure options and click the action button
+4. Monitor progress in the progress bar and debug log
+
+### Building from Source
+See [GUI/BUILD.md](GUI/BUILD.md) for detailed compilation instructions, including:
+- Prerequisites (.NET 8.0 SDK)
+- Command-line build options
+- Publishing as standalone executable
+- Visual Studio build instructions
+
+### GUI Requirements
+- Windows 10/11
+- .NET 8.0 Runtime (included in self-contained builds)
+- PowerShell 7.0+ (for firewall operations)
+- Administrator privileges

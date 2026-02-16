@@ -2,6 +2,32 @@
 
 All notable changes to RuleForge are hammered out in this file.
 
+## [2.0.0] - GUI Release - 2025
+### Added
+- **WPF GUI Application**: New graphical user interface for RuleForge
+  - Modern blacksmith-themed dark interface with orange accents
+  - Tabbed layout: Capture Rules, Compare Rules, Settings
+  - Real-time progress bar with percentage display
+  - Integrated debug log viewer with timestamps
+  - Auto-save debug logs to file for troubleshooting
+  - File browser dialogs for all input/output operations
+  - DefaultRules.json status checking and generation
+  - Support for all existing CLI functionality through the GUI
+- **Build Documentation**: Comprehensive compilation guide (BUILD.md)
+  - Prerequisites and setup instructions
+  - Multiple build configurations (Framework-Dependent, Self-Contained, Single-File, Trimmed)
+  - Visual Studio and command-line build options
+  - Troubleshooting guide
+
+### Changed
+- **Project Structure**: GUI application in separate `GUI/` folder
+- **Documentation**: Updated README.md with GUI information and installation instructions
+
+### Preserved
+- **CLI Version**: Original PowerShell script (RuleForge.ps1) remains fully functional
+- **Menu Mode**: Interactive console menu still available
+- All existing parameters and functionality unchanged
+
 ## [1.2.1] - 28-03-2025
 ### Changed
 - **Code Refactoring & Modularization**:  
