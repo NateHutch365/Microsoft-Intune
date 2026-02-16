@@ -218,9 +218,22 @@ namespace RuleForgeGUI
             var postInstallFile = txtPostInstallFile.Text;
             var outputFile = txtCompareOutput.Text;
             var formatSelection = ((ComboBoxItem)cmbCompareFormat.SelectedItem).Content.ToString()!;
-            var dualOutput = chkDualOutput.IsChecked == true || formatSelection.Contains("Both");
-            var outputFormat = formatSelection.Contains("Both") ? "JSON" : formatSelection;
             var debugOutput = chkDebugOutput.IsChecked == true;
+            
+            // Determine output format and dual output settings
+            // Dual output can be enabled either by the checkbox or by selecting "Both" format
+            bool dualOutput;
+            string outputFormat;
+            if (formatSelection.Contains("Both"))
+            {
+                dualOutput = true;
+                outputFormat = "JSON"; // Primary format when exporting both
+            }
+            else
+            {
+                dualOutput = chkDualOutput.IsChecked == true;
+                outputFormat = formatSelection;
+            }
 
             // Validate inputs
             if (!File.Exists(baselineFile))
@@ -565,7 +578,14 @@ namespace RuleForgeGUI
                 // Remove extension as RuleForge adds it based on format
                 var fileName = Path.GetFileNameWithoutExtension(dialog.FileName);
                 var directory = Path.GetDirectoryName(dialog.FileName);
-                txtCompareOutput.Text = Path.Combine(directory!, fileName);
+                if (!string.IsNullOrEmpty(directory))
+                {
+                    txtCompareOutput.Text = Path.Combine(directory, fileName);
+                }
+                else
+                {
+                    txtCompareOutput.Text = fileName;
+                }
             }
         }
 
