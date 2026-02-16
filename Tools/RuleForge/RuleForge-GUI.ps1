@@ -27,6 +27,9 @@
 
 #Requires -Version 7.0
 
+# Import required modules
+Import-Module NetSecurity -ErrorAction Stop
+
 Add-Type -AssemblyName PresentationFramework
 Add-Type -AssemblyName System.Windows.Forms
 
@@ -674,6 +677,9 @@ function Invoke-CaptureOperation {
     $ps.Runspace = $runspace
     
     [void]$ps.AddScript({
+        # Import NetSecurity module for firewall cmdlets
+        Import-Module NetSecurity -ErrorAction Stop
+        
         function ConvertTo-IntuneFirewallRule { & $ConvertToIntuneFirewallRuleFunc @args }
         function Get-FilteredFirewallRules { & $GetFilteredFirewallRulesFunc @args }
         function Export-RuleSet { & $ExportRuleSetFunc @args }
