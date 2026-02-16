@@ -426,8 +426,11 @@ function Get-FilteredFirewallRules {
 
     if ($SkipDisabled) {
         Show-StatusMessage "Skipping disabled rules..." $StatusCallback
+        $beforeCount = $allRules.Count
+        Show-StatusMessage "DEBUG: Starting Where-Object filter on $beforeCount rules..." $StatusCallback
         $allRules = $allRules | Where-Object { $_.Enabled -eq 'True' }
-        Show-StatusMessage "DEBUG: After skipping disabled: $($allRules.Count) rules remain" $StatusCallback
+        Show-StatusMessage "DEBUG: Where-Object filter completed" $StatusCallback
+        Show-StatusMessage "DEBUG: After skipping disabled: $($allRules.Count) rules remain (removed $($beforeCount - $allRules.Count))" $StatusCallback
     }
 
     if ($SkipDefaultRules) {
@@ -449,6 +452,7 @@ function Get-FilteredFirewallRules {
 
     $validProfiles = 'Private', 'Public', 'Domain', 'All'
     $selectedProfiles = $ProfileType -split ',' | ForEach-Object { $_.Trim() }
+    Show-StatusMessage "DEBUG: Selected profiles: $($selectedProfiles -join ', ')" $StatusCallback
     
     if ($selectedProfiles -contains 'All') {
         Show-StatusMessage "Processing rules for all profiles..." $StatusCallback
@@ -458,13 +462,17 @@ function Get-FilteredFirewallRules {
             Show-StatusMessage "ERROR: Invalid profile type(s): $invalidProfiles" $StatusCallback
             return @()
         }
+        Show-StatusMessage "DEBUG: Starting profile filter on $($allRules.Count) rules..." $StatusCallback
+        $beforeCount = $allRules.Count
         $allRules = $allRules | Where-Object {
             $ruleProfiles = $_.Profile -split ','
             ($ruleProfiles | Where-Object { $_ -in $selectedProfiles }).Count -gt 0
         }
-        Show-StatusMessage "Filtering rules for profile(s): $ProfileType..." $StatusCallback
+        Show-StatusMessage "DEBUG: Profile filter completed" $StatusCallback
+        Show-StatusMessage "Filtering rules for profile(s): $ProfileType - kept $($allRules.Count) of $beforeCount rules" $StatusCallback
     }
     
+    Show-StatusMessage "DEBUG: Returning $($allRules.Count) filtered rules" $StatusCallback
     return $allRules
 }
 
@@ -704,9 +712,23 @@ function Invoke-CaptureOperation {
             Show-StatusMessage "Starting $captureType capture..." "TxtCaptureLog"
             Show-StatusMessage "DEBUG: skipDisabled=$skipDisabled, skipDefault=$skipDefault, profileType=$profileType" "TxtCaptureLog"
             
+            # Build parameters for Get-FilteredFirewallRules
+            # Must use splatting because switch parameters can't use -Switch:$false syntax
+            $filterParams = @{
+                ProfileType = $profileType
+                StatusCallback = "TxtCaptureLog"
+            }
+            if ($skipDisabled) {
+                $filterParams['SkipDisabled'] = $true
+                Show-StatusMessage "DEBUG: Adding SkipDisabled switch" "TxtCaptureLog"
+            }
+            if ($skipDefault) {
+                $filterParams['SkipDefaultRules'] = $true
+                Show-StatusMessage "DEBUG: Adding SkipDefaultRules switch" "TxtCaptureLog"
+            }
+            
             # Get filtered rules
-            $allRules = Get-FilteredFirewallRules -SkipDisabled:$skipDisabled `
-                -SkipDefaultRules:$skipDefault -ProfileType $profileType -StatusCallback "TxtCaptureLog"
+            $allRules = Get-FilteredFirewallRules @filterParams
             
             if ($allRules.Count -eq 0) {
                 Show-StatusMessage "No rules to process!" "TxtCaptureLog"
@@ -714,6 +736,7 @@ function Invoke-CaptureOperation {
             }
             
             Show-StatusMessage "Processing $($allRules.Count) rules..." "TxtCaptureLog"
+            Show-StatusMessage "DEBUG: Starting rule conversion loop..." "TxtCaptureLog"
             
             # Convert rules
             $rules = @()
@@ -723,9 +746,14 @@ function Invoke-CaptureOperation {
             foreach ($rule in $allRules) {
                 $count++
                 $percent = ($count / $total) * 100
+                # Log every 50 rules to show progress
+                if ($count % 50 -eq 0 -or $count -eq 1) {
+                    Show-StatusMessage "DEBUG: Converting rule $count of $total ($([math]::Round($percent, 1))%)" "TxtCaptureLog"
+                }
                 Update-ProgressBar $percent "Converting rules: $count of $total" "TxtCaptureLog"
                 $rules += ConvertTo-IntuneFirewallRule $rule
             }
+            Show-StatusMessage "DEBUG: Rule conversion completed - $($rules.Count) rules converted" "TxtCaptureLog"
             
             # Export rules
             $dualOutput = $formatItem -eq "Both"
@@ -739,10 +767,14 @@ function Invoke-CaptureOperation {
             Show-StatusMessage "Capture completed! Processed $($rules.Count) rules in $([math]::Round($duration.TotalSeconds, 2)) seconds." "TxtCaptureLog"
             
         } catch {
+            $errorDetails = $_ | Out-String
+            $stackTrace = $_.ScriptStackTrace
             Show-StatusMessage "ERROR: $_" "TxtCaptureLog"
+            Show-StatusMessage "DEBUG: Error details: $errorDetails" "TxtCaptureLog"
+            Show-StatusMessage "DEBUG: Stack trace: $stackTrace" "TxtCaptureLog"
             $window.Dispatcher.Invoke([action]{
                 [System.Windows.MessageBox]::Show(
-                    "An error occurred during capture: $_",
+                    "An error occurred during capture: $_`n`nCheck RuleForge-GUI-Debug.log for details.",
                     "Error",
                     [System.Windows.MessageBoxButton]::OK,
                     [System.Windows.MessageBoxImage]::Error
