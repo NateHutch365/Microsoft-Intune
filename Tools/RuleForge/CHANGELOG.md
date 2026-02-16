@@ -2,6 +2,30 @@
 
 All notable changes to RuleForge are hammered out in this file.
 
+## [2.0] - 2026-02-15
+### Added
+- **GUI Version**: Created `RuleForge-GUI.ps1` with WPF-based graphical interface
+  - Tab-based layout for Capture, Compare, and About sections
+  - File browser dialogs for easy file selection
+  - Progress bars and real-time status logging
+  - Admin privilege checking on startup
+  - Background job processing to prevent UI freezing
+  - Modern flat UI styling with color-coded buttons
+  - Can be compiled to standalone executable using PS2EXE
+- **Compilation Guide**: Added `COMPILE-TO-EXE.md` with comprehensive instructions for creating standalone executable
+  - Multiple compilation methods (PS2EXE, PS2EXE-GUI, IExpress)
+  - Code signing guidance for enterprise distribution
+  - Troubleshooting section for common issues
+  - Distribution best practices
+
+### Changed
+- Version numbering: GUI edition starts at v2.0
+- README updated with extensive GUI version documentation
+  - GUI features and usage instructions
+  - Comparison table between GUI and CLI versions
+  - Screenshot placeholders and descriptions
+  - Compilation quick-start guide
+
 ## [1.2.1] - 28-03-2025
 ### Changed
 - **Code Refactoring & Modularization**:  

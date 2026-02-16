@@ -176,6 +176,119 @@ For precision forging, use switches:
 
 ![image](https://github.com/user-attachments/assets/949cd8e5-dd74-4312-92d2-78e36088d6e5)
 
+## GUI Version (v2.0+)
+
+RuleForge now includes a modern graphical user interface for users who prefer a visual experience over command-line interaction.
+
+### Overview
+
+`RuleForge-GUI.ps1` provides a WPF-based graphical interface that wraps all functionality from the CLI version. It features:
+- Tab-based interface for Capture, Compare, and About sections
+- File browser dialogs for easy file selection
+- Progress bars and real-time status logging
+- Admin privilege checking on startup
+- All the power of RuleForge with none of the command-line complexity
+
+### Running the GUI Version
+
+```powershell
+# Navigate to RuleForge directory
+cd Tools\RuleForge
+
+# Run the GUI (requires PowerShell 7.0+)
+.\RuleForge-GUI.ps1
+```
+
+**Important:** Right-click and select "Run as Administrator" or the GUI will prompt you that admin privileges are required for firewall access.
+
+### GUI Features
+
+#### Tab 1: Capture Rules
+- Select capture mode: Baseline or Post-Install
+- Browse for output file location
+- Choose output format: JSON, CSV, or Both
+- Filter options:
+  - Skip disabled rules
+  - Skip default Windows rules
+  - Select profile types (All, Private, Public, Domain, or combinations)
+- Large "Capture Rules" button to start the operation
+- Progress bar shows operation status
+- Real-time status log displays all actions and results
+
+#### Tab 2: Compare Rules
+- Browse and select baseline file
+- Browse and select post-install file
+- Specify output file prefix
+- Choose output format: JSON, CSV, Both, or Table
+- Large "Compare Rules" button to start comparison
+- Progress bar and status log show operation progress
+- Results displayed in the status log
+
+#### Tab 3: About
+- Version information (v2.0 - GUI Edition)
+- Author and contact information
+- Links to website and GitHub repository
+- Complete functionality description
+- System requirements
+- Usage tips for best results
+- Compilation instructions reference
+
+### DefaultRules.json Handling
+
+If you check "Skip default Windows rules" but `DefaultRules.json` doesn't exist, the GUI will prompt you:
+
+> DefaultRules.json not found. Would you like to create it now?
+> 
+> Note: This should only be done on a fresh OOBE device.
+
+Clicking "Yes" will generate the file automatically. This process may take several minutes depending on system performance.
+
+### User Experience Improvements
+
+- **No Execution Policy Issues**: Once compiled to .exe, no more "script is not digitally signed" warnings
+- **Intuitive Interface**: No need to remember command-line switches
+- **Visual Feedback**: Progress bars and status messages keep you informed
+- **Error Handling**: User-friendly error messages in popup dialogs
+- **Responsive UI**: Operations run in background, preventing interface freezing
+
+### Compiling to Standalone Executable
+
+The GUI can be compiled to a standalone Windows executable for easier distribution:
+
+```powershell
+# Install PS2EXE module
+Install-Module -Name ps2exe -Scope CurrentUser
+
+# Compile to executable
+Invoke-PS2EXE `
+    -InputFile "RuleForge-GUI.ps1" `
+    -OutputFile "RuleForge.exe" `
+    -NoConsole `
+    -RequireAdmin `
+    -Title "RuleForge v2.0" `
+    -Version "2.0.0.0"
+```
+
+For complete compilation instructions, see **[COMPILE-TO-EXE.md](COMPILE-TO-EXE.md)**.
+
+### GUI vs CLI: Which to Use?
+
+| Feature | GUI Version | CLI Version |
+|---------|-------------|-------------|
+| **Ease of Use** | Intuitive, visual | Requires command knowledge |
+| **Automation** | Manual operation | Scriptable with parameters |
+| **Learning Curve** | Low | Medium |
+| **Distribution** | Can compile to .exe | Script file only |
+| **Batch Processing** | Not ideal | Excellent |
+| **Interactive Use** | Excellent | Good (menu mode) |
+| **Remote Execution** | Requires RDP/GUI | Works over PowerShell remoting |
+
+**Choose GUI** if you: Want point-and-click simplicity, work locally on machines, prefer visual feedback
+
+**Choose CLI** if you: Need automation, work remotely, want to script operations, integrate with other tools
+
+Both versions maintain identical core functionality and can be used interchangeably based on your needs.
+
 ## Notes
 - **JSON Format**: Empty arrays (`[]`) mean “Any” (no specific port/address).
 - **DefaultRules.json**: For `-SkipDefaultRules`, craft it on a fresh OOBE system: `.\RuleForge.ps1 -Capture -CaptureType Baseline -Output DefaultRules.json` Place it with `RuleForge.ps1`. A Windows 11 24H2 sample is at `DefaultRules-Win11-24H2.json` (you'll want to rename this).
