@@ -50,7 +50,20 @@ Add-Type -AssemblyName WindowsBase
 # ============================================================================
 # Region: Script-Level Variables
 # ============================================================================
-$script:ScriptDir = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $MyInvocation.MyCommand.Definition }
+# Resolve app directory safely for both .ps1 and packaged .exe
+$script:ScriptDir = if ($PSScriptRoot -and (Test-Path -LiteralPath $PSScriptRoot)) {
+    $PSScriptRoot
+}
+elseif ($PSCommandPath -and (Test-Path -LiteralPath $PSCommandPath)) {
+    Split-Path -Parent $PSCommandPath
+}
+elseif ($MyInvocation.MyCommand.Path -and (Test-Path -LiteralPath $MyInvocation.MyCommand.Path)) {
+    Split-Path -Parent $MyInvocation.MyCommand.Path
+}
+else {
+    [System.AppDomain]::CurrentDomain.BaseDirectory
+}
+
 $script:LogFile = Join-Path $script:ScriptDir "RuleForge-Debug.log"
 $script:SyncHash = [hashtable]::Synchronized(@{})
 $script:SyncHash.LogQueue = [System.Collections.ArrayList]::Synchronized((New-Object System.Collections.ArrayList))
