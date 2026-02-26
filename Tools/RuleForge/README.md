@@ -65,16 +65,28 @@ I wanted to know if I could build a useful tool using just AI as the developer, 
 RuleForge crafts Windows Defender firewall rules into a form ready for Intune deployment. Capture baseline rules from a clean system, snag post-install rules after adding apps, and compare them to hammer out the new ones—all with a blazing interactive menu or classic CLI switches. Output in JSON for Intune or CSV for review, and wield it on an unmanaged machine to let apps forge their rules freely.
 
 ## Description
-Born to simplify firewall rule management for Intune, RuleForge has evolved into a blacksmith’s dream for Windows admins. Fire it up with `.\RuleForge.ps1` to enter the forge (menu mode), or swing the CLI hammer with switches for precision strikes. Version 1.2 brings a glowing menu system, colored text, and the power to skip default rules.
+Born to simplify firewall rule management for Intune, RuleForge has evolved into a blacksmith’s dream for Windows admins. Choose your weapon:
+
+- **GUI Mode** (v2.0): Launch `RuleForge-GUI.ps1` for a full WPF graphical interface with progress tracking and debug logging.
+- **Menu Mode**: Fire up `.\RuleForge.ps1` to enter the forge with a blazing interactive menu.
+- **CLI Mode**: Swing the CLI hammer with switches for precision strikes and automation.
 
 ## Requirements
+
+### GUI Version (`RuleForge-GUI.ps1`)
+- **PowerShell**: Windows PowerShell 5.1 or PowerShell 7.x on Windows.
+- **Permissions**: Run as Local Administrator to wield firewall rule access.
+- **Module**: Relies on `NetSecurity` (built into Windows).
+- **.NET Framework**: WPF assemblies (included with Windows).
+
+### CLI Version (`RuleForge.ps1`)
 - **PowerShell**: Version 7.0 or later (uses `??` operator and ANSI colors via `$PSStyle`).
 - **Permissions**: Run as Local Administrator to wield firewall rule access.
 - **Module**: Relies on `NetSecurity` (built into Windows PowerShell).
 
 ## Installation
-1. Ensure PowerShell 7 is installed (`winget install --id Microsoft.PowerShell --source winget`; grab it from [Microsoft](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.5) if needed).
-2. Download `RuleForge.ps1` from [GitHub](https://github.com/NateHutch365/Microsoft-Intune/tree/main/Tools/RuleForge).
+1. For the CLI version, ensure PowerShell 7 is installed (`winget install --id Microsoft.PowerShell --source winget`; grab it from [Microsoft](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.5) if needed). The GUI version works with the built-in Windows PowerShell 5.1.
+2. Download `RuleForge.ps1` and/or `RuleForge-GUI.ps1` from [GitHub](https://github.com/NateHutch365/Microsoft-Intune/tree/main/Tools/RuleForge).
 3. (Optional) Drop `DefaultRules.json` in the same directory for `-SkipDefaultRules`. A sample `DefaultRules-Win11-24H2.json` is included for Windows 11 24H2.
 
 ## Running the Script
@@ -83,10 +95,27 @@ Scripts from the web carry the "Mark of the Web" and may be blocked by PowerShel
 - **PowerShell**: `Unblock-File -Path .\RuleForge.ps1`.
 
 Then fire up the forge:
+- **GUI Mode**: `.\RuleForge-GUI.ps1` (launches the WPF graphical interface).
 - **Menu Mode**: `.\RuleForge.ps1` (no switches).
 - **CLI Mode**: `.\RuleForge.ps1 -Capture -CaptureType Baseline -Output baseline.json` (with switches).
 
 ## Usage
+
+### GUI Mode (v2.0)
+Launch `RuleForge-GUI.ps1` to open the graphical interface:
+```powershell
+.\RuleForge-GUI.ps1
+```
+
+The GUI provides:
+- **Capture Rules tab**: Select Baseline or Post-Install capture, set output file/format, configure filters (skip disabled, skip defaults, profile type), and click “Start Capture”.
+- **Compare Rules tab**: Browse for baseline and post-install JSON files, set output prefix, choose dual JSON+CSV export, and click “Start Compare”.
+- **Progress bar**: Real-time progress tracking during capture and compare operations.
+- **Debug log panel**: Live scrolling log with timestamps for troubleshooting. Entries are also written to `RuleForge-Debug.log`.
+- **Generate DefaultRules.json**: Button to create a default rules file from the current system.
+
+> **Tip:** To compile the GUI to a standalone `.exe`, see [COMPILE-GUIDE.md](COMPILE-GUIDE.md).
+
 ### The Forge (Menu Mode)
 Run `.\RuleForge.ps1` without switches to ignite the interactive menu:
 
@@ -176,15 +205,19 @@ For precision forging, use switches:
 
 ![image](https://github.com/user-attachments/assets/949cd8e5-dd74-4312-92d2-78e36088d6e5)
 
+## Compiling to an Executable
+RuleForge can be compiled into a standalone `.exe` using PS2EXE. See [COMPILE-GUIDE.md](COMPILE-GUIDE.md) for step-by-step instructions.
+
 ## Notes
 - **JSON Format**: Empty arrays (`[]`) mean “Any” (no specific port/address).
 - **DefaultRules.json**: For `-SkipDefaultRules`, craft it on a fresh OOBE system: `.\RuleForge.ps1 -Capture -CaptureType Baseline -Output DefaultRules.json` Place it with `RuleForge.ps1`. A Windows 11 24H2 sample is at `DefaultRules-Win11-24H2.json` (you'll want to rename this).
 - **Colors**: Requires a modern terminal (e.g., Windows Terminal) for ANSI colors to glow.
+- **Debug Log**: The GUI version writes detailed debug logs to `RuleForge-Debug.log` in the script directory. Use the log panel or log file to troubleshoot issues.
 
 ## Roadmap
 - **v2.x**: Integrate Microsoft Defender XDR API for Advanced Hunting queries to capture live blocked connections from production.
 - **v2.x**: Incorporate `Test-IntuneFirewallRules` for rule validation and error reporting via Graph API.
-- **v2.0**: Forge into a PowerShell module.
+- **v2.0**: WPF GUI application with progress tracking and debug logging. ✅
 - **v1.5**: Enhance menu with interactive app selection for production devices.
 - **v1.4**: Add `-ExtractAppRules` to filter app-specific rules from full captures.
 - **v1.3**: Introduce `-AppPath` to capture app-specific rules from live systems, plus basic rule validation.

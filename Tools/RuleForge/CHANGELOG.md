@@ -2,6 +2,27 @@
 
 All notable changes to RuleForge are hammered out in this file.
 
+## [2.0.0] - GUI Edition
+### Added
+- **WPF-Based GUI Application** (`RuleForge-GUI.ps1`):
+  - Full graphical interface built with WPF in PowerShell (no .NET compilation needed).
+  - **Capture Rules tab**: Baseline and Post-Install capture with all filter options (skip disabled, skip defaults, profile type).
+  - **Compare Rules tab**: File browser dialogs for baseline/post-install files, dual JSON+CSV export option.
+  - **Real-time progress bar**: Visual progress tracking during capture and compare operations.
+  - **Debug log panel**: Live scrolling log with timestamps displayed in the GUI and written to `RuleForge-Debug.log`.
+  - **Background processing**: Operations run in a separate runspace to keep the UI responsive.
+  - **Cancel support**: Operations can be cancelled mid-execution.
+  - **File browse dialogs**: Open/Save dialogs for all file inputs and outputs.
+  - **Generate DefaultRules.json**: Dedicated button to create default rules from the current system.
+  - **Admin check**: Warning displayed if not running as Administrator.
+  - Compatible with Windows PowerShell 5.1+ (no PowerShell 7 requirement).
+- **EXE Compilation Guide** (`COMPILE-GUIDE.md`):
+  - Step-by-step instructions to compile both GUI and CLI versions to standalone executables using PS2EXE.
+  - Includes code signing guidance and troubleshooting tips.
+
+### Preserved
+- **Original CLI version** (`RuleForge.ps1` v1.2.1) remains unchanged. Admins can choose either the GUI or CLI version.
+
 ## [1.2.1] - 28-03-2025
 ### Changed
 - **Code Refactoring & Modularization**:  
