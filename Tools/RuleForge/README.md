@@ -106,6 +106,7 @@ Launch `RuleForge-GUI.ps1` to open the graphical interface:
 ```powershell
 .\RuleForge-GUI.ps1
 ```
+<img width="904" height="771" alt="image" src="https://github.com/user-attachments/assets/6e87d788-d5f5-4ea9-9652-779d9b869454" />
 
 The GUI provides:
 - **Capture Rules tab**: Select Baseline or Post-Install capture, set output file/format, configure filters (skip disabled, skip defaults, profile type), and click “Start Capture”.
