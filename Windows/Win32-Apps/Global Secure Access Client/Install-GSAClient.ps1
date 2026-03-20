@@ -7,6 +7,16 @@
         Version: v1
         Release Date: 03/10/2025
 
+        Modified By: Nate Hutchinson | NateHutch365
+        Modified Date: 20/03/2026
+        Changes:
+            - Replaced HttpClient async download with WebClient to fix AggregateException
+              failures under SYSTEM context in PowerShell 5.1 (.NET Framework)
+            - Added forced TLS 1.2 negotiation to prevent SSL/TLS handshake failures
+            - Fixed $Proc.ExitCode null reference in Finally block when download fails
+            - Fixed copy/paste typo in Uninstall-GSA log message ("Installing" -> "Uninstalling")
+            - Removed System.Net.Http assembly import (no longer required)
+
         Intune Info:
         Install Command:    %windir%\SysNative\WindowsPowershell\v1.0\powershell.exe -noprofile -executionpolicy bypass -file .\Install-GSAClient.ps1 -Install
         Uninstall Command:  %windir%\SysNative\WindowsPowershell\v1.0\powershell.exe -noprofile -executionpolicy bypass -file .\Install-GSAClient.ps1 -Uninstall
@@ -22,9 +32,6 @@ Param(
 $Script:ScriptName = "Install-GSAClient"
 $Script:LogFile = "$ScriptName.log"
 $Script:LogsFolder = "$env:ProgramData\Microsoft\IntuneManagementExtension\Logs"
-
-### Import required assemblies - Required due to WebClient deprecation: https://learn.microsoft.com/en-us/dotnet/core/compatibility/networking/6.0/webrequest-deprecated
-Add-Type -AssemblyName System.Net.Http
 
 ### Functions ###
 function Start-Logging {
@@ -46,28 +53,34 @@ function Get-File {
         [ValidateNotNullOrEmpty()]
         [string]$Name
     )
-    Begin {
-        # Create httpClient object
-        $httpClient = New-Object System.Net.Http.HttpClient
-        $response = $httpClient.GetAsync($URL)
-        $response.Wait()
+
+    # Force TLS 1.2 - required for SYSTEM context on PowerShell 5.1 / .NET Framework 4.x
+    # Without this, HTTPS handshakes to aka.ms / download.microsoft.com can fail silently
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+    # Create destination path if it doesn't exist
+    If (-not(Test-Path -Path $Path)) {
+        New-Item -Path $Path -ItemType Directory -Force | Out-Null
     }
-    Process {
-        # Create path if it doesn't exist
-        If (-not(Test-Path -Path $Path)) {
-            New-Item -Path $Path -ItemType Directory -Force | Out-Null
+
+    $destination = Join-Path -Path $Path -ChildPath $Name
+
+    # Use WebClient for synchronous download - more reliable than HttpClient async under
+    # SYSTEM context in PS 5.1. Note: WebClient deprecation only applies to .NET Core 6+,
+    # not .NET Framework which PS 5.1 uses (CLR 4.x).
+    Try {
+        Write-Host "Downloading to: $destination"
+        $webClient = New-Object System.Net.WebClient
+        $webClient.DownloadFile($URL, $destination)
+        Write-Host "Download complete"
+    }
+    Catch {
+        Throw "Download failed from $URL - $($_.Exception.Message)"
+    }
+    Finally {
+        if ($null -ne $webClient) {
+            $webClient.Dispose()
         }
-        # Create file stream
-        $outputFileStream = [System.IO.FileStream]::new((Join-Path -Path $Path -ChildPath $Name), [System.IO.FileMode]::Create, [System.IO.FileAccess]::Write)
-        # Download file
-        $downloadTask = $response.Result.Content.CopyToAsync($outputFileStream)
-        $downloadTask.Wait()
-        # Close the file stream
-        $outputFileStream.Close()
-    }
-    End {
-        # Dispose of httpClient object
-        $httpClient.Dispose()
     }
 }
 
@@ -101,7 +114,7 @@ function Install-GSA {
 }
 
 function Uninstall-GSA {
-    Write-Host "Installing: $($FileName)"
+    Write-Host "Uninstalling: $($FileName)"
     Try {
         $Script:Proc = Start-Process $env:TEMP\$FileName -ArgumentList "/uninstall /quiet /norestart" -Wait -PassThru -ErrorAction Stop
     }
@@ -127,13 +140,22 @@ Catch {
 }
 
 Finally {
-    If ($Proc.ExitCode -eq '0') {
-        Write-Host "SUCCESS: Operation succeeded with exit code: $($Proc.ExitCode)"
-        Exit $($Proc.ExitCode)
+    # Guard against $Proc being null if the script failed before reaching install/uninstall
+    If ($null -ne $Script:Proc) {
+        If ($Proc.ExitCode -eq 0) {
+            Write-Host "SUCCESS: Operation succeeded with exit code: $($Proc.ExitCode)"
+            Stop-Transcript
+            Exit $($Proc.ExitCode)
+        }
+        Else {
+            Write-Host "FAILURE: Operation failed with exit code: $($Proc.ExitCode)"
+            Stop-Transcript
+            Exit $($Proc.ExitCode)
+        }
     }
     Else {
-        Write-Host "FAILURE: Operation failed with exit code: $($Proc.ExitCode)"
-        Exit $($Proc.ExitCode)
+        Write-Host "FAILURE: Script did not reach install/uninstall stage. Check log for download errors."
+        Stop-Transcript
+        Exit 1
     }
-    Stop-Transcript
 }
